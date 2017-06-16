@@ -24,7 +24,7 @@ public class PM {
         //uuuu
         //dsdsdsd
         
-        Sistema_de_Control s = new Sistema_de_Control();
+        Sistema_de_Control s = new Sistema_de_Control();        
         s.setVisible(true);
     }
     

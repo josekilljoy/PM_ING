@@ -5,7 +5,10 @@
  */
 package Diseño;
 
+import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Toolkit;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -19,6 +22,9 @@ public class Sistema_de_Control extends javax.swing.JFrame {
      */
     public Sistema_de_Control() {
         initComponents();
+        
+        //Centramos la ubicación de la ventana con respecto a la pantalla        
+        setLocationRelativeTo(null);
         
         // Seteamos el texto de ayuda por defecto para los jTextField Producción
         TextPrompt placeholder1 = new TextPrompt("Nombre del Productor", JTF_Productor);
@@ -68,7 +74,7 @@ public class Sistema_de_Control extends javax.swing.JFrame {
         JRB_Prod_ListarProductores = new javax.swing.JRadioButton();
         jPanel1 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
-        jRadioButton4 = new javax.swing.JRadioButton();
+        JRB_AgregarEstablecimiento = new javax.swing.JRadioButton();
         jRadioButton5 = new javax.swing.JRadioButton();
         jRadioButton6 = new javax.swing.JRadioButton();
         JB_Estab_Aceptar = new javax.swing.JButton();
@@ -196,7 +202,7 @@ public class Sistema_de_Control extends javax.swing.JFrame {
                         .addComponent(JB_Prod_Aceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(JRB_Prod_ListarProductores))
                     .addComponent(jLabel2))
-                .addContainerGap(206, Short.MAX_VALUE))
+                .addContainerGap(246, Short.MAX_VALUE))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -225,15 +231,15 @@ public class Sistema_de_Control extends javax.swing.JFrame {
                         .addComponent(buttelimprodu)))
                 .addGap(63, 63, 63)
                 .addComponent(JB_Prod_Aceptar)
-                .addContainerGap(112, Short.MAX_VALUE))
+                .addContainerGap(90, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Productores", jPanel6);
 
         jLabel3.setText("Seleccione la opción que desea realizar:");
 
-        grupoaccestable.add(jRadioButton4);
-        jRadioButton4.setText("Agregar nuevo establecimiento.");
+        grupoaccestable.add(JRB_AgregarEstablecimiento);
+        JRB_AgregarEstablecimiento.setText("Agregar nuevo establecimiento.");
 
         grupoaccestable.add(jRadioButton5);
         jRadioButton5.setText("Modificar establecimiento existente.");
@@ -242,6 +248,11 @@ public class Sistema_de_Control extends javax.swing.JFrame {
         jRadioButton6.setText("Eliminar establecimiento.");
 
         JB_Estab_Aceptar.setText("Aceptar");
+        JB_Estab_Aceptar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JB_Estab_AceptarActionPerformed(evt);
+            }
+        });
 
         jLabel4.setText("Seleccione la consulta a realizar:");
 
@@ -270,7 +281,7 @@ public class Sistema_de_Control extends javax.swing.JFrame {
                         .addGap(38, 38, 38)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jRadioButton5)
-                            .addComponent(jRadioButton4)
+                            .addComponent(JRB_AgregarEstablecimiento)
                             .addComponent(jRadioButton6)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(39, 39, 39)
@@ -284,7 +295,7 @@ public class Sistema_de_Control extends javax.swing.JFrame {
                     .addComponent(jRadioButton7)
                     .addComponent(jRadioButton11)
                     .addComponent(jRadioButton12))
-                .addContainerGap(204, Short.MAX_VALUE))
+                .addContainerGap(244, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -296,7 +307,7 @@ public class Sistema_de_Control extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jRadioButton4)
+                        .addComponent(JRB_AgregarEstablecimiento)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jRadioButton5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -313,7 +324,7 @@ public class Sistema_de_Control extends javax.swing.JFrame {
                 .addComponent(jRadioButton12)
                 .addGap(39, 39, 39)
                 .addComponent(JB_Estab_Aceptar)
-                .addContainerGap(108, Short.MAX_VALUE))
+                .addContainerGap(86, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Establecimiento", jPanel1);
@@ -377,7 +388,7 @@ public class Sistema_de_Control extends javax.swing.JFrame {
                             .addComponent(jRadioButton17)
                             .addComponent(jRadioButton18)
                             .addComponent(JB_Tambo_Aceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(221, Short.MAX_VALUE))
+                .addContainerGap(261, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -404,7 +415,7 @@ public class Sistema_de_Control extends javax.swing.JFrame {
                 .addComponent(jRadioButton18)
                 .addGap(34, 34, 34)
                 .addComponent(JB_Tambo_Aceptar)
-                .addContainerGap(132, Short.MAX_VALUE))
+                .addContainerGap(110, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Tambo", jPanel2);
@@ -455,7 +466,7 @@ public class Sistema_de_Control extends javax.swing.JFrame {
                                 .addComponent(jRadioButton24)
                                 .addComponent(jRadioButton23, javax.swing.GroupLayout.Alignment.LEADING))
                             .addComponent(JB_Animal_Aceptar))))
-                .addContainerGap(237, Short.MAX_VALUE))
+                .addContainerGap(277, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -478,7 +489,7 @@ public class Sistema_de_Control extends javax.swing.JFrame {
                         .addComponent(jRadioButton22)))
                 .addGap(51, 51, 51)
                 .addComponent(JB_Animal_Aceptar)
-                .addContainerGap(141, Short.MAX_VALUE))
+                .addContainerGap(119, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Animal", jPanel3);
@@ -524,47 +535,44 @@ public class Sistema_de_Control extends javax.swing.JFrame {
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel12)
-                            .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel14)
-                                .addComponent(jLabel13))
-                            .addComponent(jLabel11))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(JTF_Animal, javax.swing.GroupLayout.DEFAULT_SIZE, 225, Short.MAX_VALUE)
-                            .addComponent(JTF_Establecimiento)
-                            .addComponent(JTF_Productor)
-                            .addComponent(JTF_Tambo))
+                    .addComponent(jLabel12)
+                    .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jLabel14)
+                        .addComponent(jLabel13))
+                    .addComponent(jLabel11))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(JTF_Tambo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 204, Short.MAX_VALUE)
+                    .addComponent(JTF_Establecimiento, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(JTF_Productor, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(JTF_Animal))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel15, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jButton10)
+                            .addComponent(jButton12, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButton11, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButton13, javax.swing.GroupLayout.Alignment.LEADING))
                         .addGap(18, 18, 18)
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(jButton10)
-                                    .addComponent(jButton12, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jButton11, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jButton13, javax.swing.GroupLayout.Alignment.LEADING))
-                                .addGap(18, 18, 18)
-                                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jTextField8)
-                                    .addComponent(jTextField7)
-                                    .addComponent(jTextField6)
-                                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                                .addComponent(jLabel15)
-                                .addGap(5, 5, 5)))
-                        .addGap(30, 30, 30))))
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jTextField8)
+                            .addComponent(jTextField7)
+                            .addComponent(jTextField6)
+                            .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(35, 35, 35))
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addGap(21, 21, 21)
+                .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGap(27, 27, 27)
+                .addGap(22, 22, 22)
                 .addComponent(jLabel10)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel15)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -602,13 +610,13 @@ public class Sistema_de_Control extends javax.swing.JFrame {
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(22, 22, 22)
+                .addContainerGap()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(JB_Produccion_CargarNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel9))
-                .addGap(29, 29, 29)
+                .addGap(43, 43, 43)
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addContainerGap(73, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -618,7 +626,7 @@ public class Sistema_de_Control extends javax.swing.JFrame {
                     .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addComponent(jLabel9)
-                        .addGap(35, 35, 35)
+                        .addGap(36, 36, 36)
                         .addComponent(JB_Produccion_CargarNuevo)))
                 .addGap(56, 56, 56))
         );
@@ -638,13 +646,15 @@ public class Sistema_de_Control extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTabbedPane1))
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 799, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(23, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTabbedPane1))
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 364, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(22, Short.MAX_VALUE))
         );
 
         pack();
@@ -669,6 +679,17 @@ public class Sistema_de_Control extends javax.swing.JFrame {
     private void JB_Produccion_CargarNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JB_Produccion_CargarNuevoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_JB_Produccion_CargarNuevoActionPerformed
+
+    private void JB_Estab_AceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JB_Estab_AceptarActionPerformed
+        // TODO add your handling code here:
+        
+        if (JRB_AgregarEstablecimiento.isSelected()) {
+            // Ejecutar la Ventana AltaEstablecimiento
+            altaEstablecimiento altaEs = new altaEstablecimiento();
+            altaEs.setVisible(true);
+        }
+        
+    }//GEN-LAST:event_JB_Estab_AceptarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -711,6 +732,7 @@ public class Sistema_de_Control extends javax.swing.JFrame {
     private javax.swing.JButton JB_Prod_Aceptar;
     private javax.swing.JButton JB_Produccion_CargarNuevo;
     private javax.swing.JButton JB_Tambo_Aceptar;
+    private javax.swing.JRadioButton JRB_AgregarEstablecimiento;
     private javax.swing.JRadioButton JRB_Estab_ACargo;
     private javax.swing.JRadioButton JRB_Prod_ListarProductores;
     private javax.swing.JRadioButton JRB_Prod_Pertenencia;
@@ -772,7 +794,6 @@ public class Sistema_de_Control extends javax.swing.JFrame {
     private javax.swing.JRadioButton jRadioButton22;
     private javax.swing.JRadioButton jRadioButton23;
     private javax.swing.JRadioButton jRadioButton24;
-    private javax.swing.JRadioButton jRadioButton4;
     private javax.swing.JRadioButton jRadioButton5;
     private javax.swing.JRadioButton jRadioButton6;
     private javax.swing.JRadioButton jRadioButton7;
