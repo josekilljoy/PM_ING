@@ -5,6 +5,8 @@
  */
 package pm;
 
+import Diseño.Sistema_de_Control;
+
 /**
  *
  * @author josekilljoy95
@@ -22,7 +24,8 @@ public class PM {
         //uuuu
         //dsdsdsd
         
-        System.out.println("Prueba de código");
+        Sistema_de_Control s = new Sistema_de_Control();        
+        s.setVisible(true);
     }
     
 }
