@@ -21,14 +21,6 @@ public class Productor {
     //Lo usaremos para asignar el nro de identificador de cada instancia
     private static int NroEstablecimiento=0;
     
-    //Constructor con el id del productor
-    public Productor(int idProductor, String nombre, int telefono) {
-        this.idProductor=idProductor;
-        this.nombre=nombre;
-        this.telefono=telefono;
-        this.establecimientos=new ArrayList<Establecimiento>();
-    }
-    
     // Constructor con el id del productor por defecto
     public Productor(String nombre, int telefono) {        
         this.nombre=nombre;

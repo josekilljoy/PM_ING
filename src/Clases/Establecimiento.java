@@ -21,16 +21,6 @@ public class Establecimiento {
         //Constante que indica el nro de establecimientos creados
         //Lo usaremos para asignar el nro de identificador de cada instancia
         private static int NroEstablecimiento=0;
-
-    public Establecimiento(int idEstablecimiento, String nombre, int telefono, String ubicacion) {
-        this.idEstablecimiento = idEstablecimiento;
-        this.nombre = nombre;
-        this.telefono = telefono;
-        this.ubicacion = ubicacion;
-        this.productores = new ArrayList<Productor>();
-        
-        NroEstablecimiento++;
-    }
     
     //Sin identificador del Establecimiento
     public Establecimiento(String nombre, int telefono, String ubicacion) {
