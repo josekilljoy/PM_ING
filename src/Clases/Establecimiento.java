@@ -13,7 +13,7 @@ public class Establecimiento {
     	private String nombre;
 	private String telefono;
 	private String ubicación;
-	private Productor m_Productor;
+	private Productor m_Productor = new Productor();
 
     public Establecimiento(String nombre, String telefono, String ubicación, Productor m_Productor) {
         this.nombre = nombre;
