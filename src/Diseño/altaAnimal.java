@@ -32,11 +32,18 @@ public class altaAnimal extends javax.swing.JFrame {
         TextPrompt placeholder2 = new TextPrompt("Raza del Animal", JTF_Raza);
         placeholder2.changeAlpha(0.75f);
         placeholder2.changeStyle(Font.ITALIC);
+        TextPrompt placeholder3 = new TextPrompt("Nombre del Animal", JTF_Nombre);
+        placeholder3.changeAlpha(0.75f);
+        placeholder3.changeStyle(Font.ITALIC);
     }
 
     public String validarCampos() {
         String error="";
         
+        
+        if ("".equals(JTF_Nombre.getText())) {
+            error+="Falta ingresar Nombre\n";
+        }
         if ("".equals(JTF_Etiqueta.getText())) {
             error+="Falta ingresar Etiqueta\n";
         }
@@ -64,6 +71,8 @@ public class altaAnimal extends javax.swing.JFrame {
         altabutt = new javax.swing.JButton();
         cancelbutt = new javax.swing.JButton();
         altanom = new javax.swing.JLabel();
+        JTF_Nombre = new javax.swing.JTextField();
+        altanom1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -95,32 +104,40 @@ public class altaAnimal extends javax.swing.JFrame {
 
         altanom.setText("Etiqueta:");
 
+        JTF_Nombre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JTF_NombreActionPerformed(evt);
+            }
+        });
+
+        altanom1.setText("Nombre:");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(21, 21, 21)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(21, 21, 21)
-                                .addComponent(altanom))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(altatel)))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addComponent(altabutt, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(cancelbutt, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addComponent(JTF_Etiqueta, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(JTF_Raza, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(21, 21, 21)
-                        .addComponent(titalta)))
+                    .addComponent(titalta)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addComponent(altabutt, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(18, 18, 18)
+                            .addComponent(cancelbutt, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(altanom)
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(altatel, javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(altanom1, javax.swing.GroupLayout.Alignment.TRAILING))))
+                            .addGap(18, 18, 18)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(JTF_Etiqueta, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(JTF_Raza, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(JTF_Nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(15, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -130,17 +147,21 @@ public class altaAnimal extends javax.swing.JFrame {
                 .addComponent(titalta)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(JTF_Nombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(altanom1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(JTF_Etiqueta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(altanom))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(JTF_Raza, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(altatel))
-                .addGap(37, 37, 37)
+                .addGap(31, 31, 31)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(altabutt)
                     .addComponent(cancelbutt))
-                .addContainerGap(28, Short.MAX_VALUE))
+                .addContainerGap(25, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -198,6 +219,10 @@ public class altaAnimal extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_JTF_EtiquetaActionPerformed
 
+    private void JTF_NombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JTF_NombreActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_JTF_NombreActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -235,9 +260,11 @@ public class altaAnimal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField JTF_Etiqueta;
+    private javax.swing.JTextField JTF_Nombre;
     private javax.swing.JTextField JTF_Raza;
     private javax.swing.JButton altabutt;
     private javax.swing.JLabel altanom;
+    private javax.swing.JLabel altanom1;
     private javax.swing.JLabel altatel;
     private javax.swing.JButton cancelbutt;
     private javax.swing.JPanel jPanel1;

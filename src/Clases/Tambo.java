@@ -81,6 +81,14 @@ public class Tambo {
         NroTambo++;
     }
     
+    //Constructor que se usa para le lectura un Tambo desde la base de datos
+    public Tambo(int idTambo, String nombre, String distribucion, ArrayList<Animal> animales) {
+        this.idTambo=idTambo;
+        this.nombre=nombre;
+        this.distribucion=distribucion;
+        this.animales=animales;
+    }
+    
     //Constructor por defecto
     public Tambo() {
         this.nombre="";

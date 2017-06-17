@@ -39,11 +39,27 @@ public class Animal {
         this.raza = raza;
     }
     
-    //La etiqueta del animal es el identificador
-    private String etiqueta;
-    private String raza;
+     /**
+     * @return the nombre
+     */
+    public String getNombre() {
+        return nombre;
+    }
+
+    /**
+     * @param nombre the nombre to set
+     */
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
     
-    public Animal(String etiqueta, String raza) {
+    //La etiqueta del animal es el identificador
+    private String nombre;
+    private String raza;
+    private String etiqueta;
+    
+    public Animal(String nombre, String raza, String etiqueta) {
+        this.nombre=nombre;
         this.etiqueta=etiqueta;
         this.raza=raza;
     }
@@ -53,4 +69,5 @@ public class Animal {
         etiqueta="";
         raza="";
     }
+   
 }

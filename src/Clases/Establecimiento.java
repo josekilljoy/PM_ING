@@ -96,6 +96,15 @@ public class Establecimiento {
         NroEstablecimiento++;
     }
     
+    //Constructor que se usa para le lectura un Establecimiento desde la base de datos
+    public Establecimiento(int idEstablecimiento, String nombre, int telefono, String ubicacion, ArrayList<Productor> productores) {
+        this.idEstablecimiento=idEstablecimiento;
+        this.nombre = nombre;
+        this.telefono = telefono;
+        this.ubicacion = ubicacion;
+        this.productores = productores;        
+    }
+    
     public Establecimiento() {
         this.nombre = "";
         this.telefono = 0;

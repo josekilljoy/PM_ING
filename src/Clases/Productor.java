@@ -96,6 +96,14 @@ public class Productor {
         NroEstablecimiento++;
     }
     
+    //Constructor que se usa para le lectura un Productor desde la base de datos
+    public Productor(int idProductor, String nombre, int telefono, ArrayList<Establecimiento> establecimientos) {        
+        this.idProductor=idProductor;
+        this.nombre=nombre;
+        this.telefono=telefono;
+        this.establecimientos=establecimientos;
+    }
+    
     //Constructor por defecto
     public Productor() {
         nombre="";
