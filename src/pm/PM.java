@@ -5,6 +5,7 @@
  */
 package pm;
 
+import Clases.Establecimiento;
 import Diseño.Sistema_de_Control;
 
 /**
@@ -27,6 +28,15 @@ public class PM {
         Sistema_de_Control s = new Sistema_de_Control();
         s.setTitle("Sistema de Control Lechero");
         s.setVisible(true);
+        
+        Establecimiento es = new Establecimiento();
+        es.getIdEstablecimiento();
+        
+        Establecimiento es2 = new Establecimiento();
+        es2.getIdEstablecimiento();
+        
+        Establecimiento es3 = new Establecimiento();
+        es3.getIdEstablecimiento();
     }
     
 }

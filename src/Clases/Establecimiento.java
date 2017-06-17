@@ -5,62 +5,114 @@
  */
 package Clases;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author josekilljoy95
  */
 public class Establecimiento {
+        private int idEstablecimiento;
     	private String nombre;
-	private String telefono;
-	private String ubicación;
-	private Productor m_Productor;
+	private int telefono;
+	private String ubicacion;
+	private ArrayList<Productor> productores;
+        
+        //Constante que indica el nro de establecimientos creados
+        //Lo usaremos para asignar el nro de identificador de cada instancia
+        private static int NroEstablecimiento=0;
 
-    public Establecimiento(String nombre, String telefono, String ubicación, Productor m_Productor) {
+    public Establecimiento(int idEstablecimiento, String nombre, int telefono, String ubicacion) {
+        this.idEstablecimiento = idEstablecimiento;
         this.nombre = nombre;
         this.telefono = telefono;
-        this.ubicación = ubicación;
-        this.m_Productor = m_Productor;
-    }
-
-    public Establecimiento(String nombre, String telefono, String ubicación) {
-        this.nombre = nombre;
-        this.telefono = telefono;
-        this.ubicación = ubicación;
+        this.ubicacion = ubicacion;
+        this.productores = new ArrayList<Productor>();
+        
+        NroEstablecimiento++;
     }
     
+    //Sin identificador del Establecimiento
+    public Establecimiento(String nombre, int telefono, String ubicacion) {
+        this.nombre = nombre;
+        this.telefono = telefono;
+        this.ubicacion = ubicacion;
+        this.productores = new ArrayList<Productor>();
+        
+        idEstablecimiento=NroEstablecimiento;        
+        NroEstablecimiento++;
+    }
+
+    public Establecimiento(String nombre, int telefono, String ubicacion, ArrayList<Productor> productores) {
+        this.nombre = nombre;
+        this.telefono = telefono;
+        this.ubicacion = ubicacion;
+        this.productores = productores;
+        
+        idEstablecimiento=NroEstablecimiento;
+        NroEstablecimiento++;
+    }
+    
+    public Establecimiento() {
+        this.nombre = "";
+        this.telefono = 0;
+        this.ubicacion = "";
+        this.productores = new ArrayList<Productor>();
+        
+        idEstablecimiento=NroEstablecimiento;
+        NroEstablecimiento++;
+    }
 
     public String getNombre() {
         return nombre;
     }
 
-    public String getTelefono() {
+    public int getTelefono() {
         return telefono;
     }
 
-    public String getUbicación() {
-        return ubicación;
-    }
-
-    public Productor getM_Productor() {
-        return m_Productor;
+    public String getUbicacion() {
+        return ubicacion;
     }
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
 
-    public void setTelefono(String telefono) {
+    public void setTelefono(int telefono) {
         this.telefono = telefono;
     }
 
-    public void setUbicación(String ubicación) {
-        this.ubicación = ubicación;
+    public void setUbicacion(String ubicación) {
+        this.ubicacion = ubicación;
     }
 
-    public void setM_Productor(Productor m_Productor) {
-        this.m_Productor = m_Productor;
+    /**
+     * @return the productores
+     */
+    public ArrayList<Productor> getProductores() {
+        return productores;
     }
-        
-        
+
+    /**
+     * @param productores the productores to set
+     */
+    public void setProductores(ArrayList<Productor> productores) {
+        this.productores = productores;
+    }
+
+    /**
+     * @return the idEstablecimiento
+     */
+    public int getIdEstablecimiento() {
+        return idEstablecimiento;
+    }
+
+    /**
+     * @param idEstablecimiento the idEstablecimiento to set
+     */
+    public void setIdEstablecimiento(int idEstablecimiento) {
+        this.idEstablecimiento = idEstablecimiento;
+    }
 
 }
