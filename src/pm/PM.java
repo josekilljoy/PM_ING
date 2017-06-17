@@ -24,7 +24,8 @@ public class PM {
         //uuuu
         //dsdsdsd
         
-        Sistema_de_Control s = new Sistema_de_Control();        
+        Sistema_de_Control s = new Sistema_de_Control();
+        s.setTitle("Sistema de Control Lechero");
         s.setVisible(true);
     }
     

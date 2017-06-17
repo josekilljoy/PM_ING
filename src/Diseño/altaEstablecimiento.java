@@ -5,6 +5,7 @@
  */
 package Diseño;
 
+import java.awt.Font;
 import javax.swing.JOptionPane;
 
 /**
@@ -19,11 +20,24 @@ public class altaEstablecimiento extends javax.swing.JFrame {
     public altaEstablecimiento() {
         initComponents();
         
+        super.setTitle("Alta de nuevo establecimiento");
+        
         //Centramos a la ventana
-        setLocationRelativeTo(null);
+        super.setLocationRelativeTo(null);
         
         //Que haga focus en este campo al iniciar la ventana
         JTF_Nombre.requestFocus();
+        
+        //Texto de ayuda para rellenar los campos
+        TextPrompt placeholder1 = new TextPrompt("Nombre del Establecimiento", JTF_Nombre);
+        placeholder1.changeAlpha(0.75f);
+        placeholder1.changeStyle(Font.ITALIC);
+        TextPrompt placeholder2 = new TextPrompt("Teléfono del Establecimiento", JTF_Telefono);
+        placeholder2.changeAlpha(0.75f);
+        placeholder2.changeStyle(Font.ITALIC);
+        TextPrompt placeholder3 = new TextPrompt("Ubicación del Establecimiento", JTF_Ubicacion);
+        placeholder3.changeAlpha(0.75f);
+        placeholder3.changeStyle(Font.ITALIC);
         
         // Cargamos la lista de productores
         //Completar...
@@ -159,17 +173,17 @@ public class altaEstablecimiento extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(20, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(31, Short.MAX_VALUE))
+                .addGap(18, 18, 18))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(23, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addGap(22, 22, 22))
         );
 
         pack();
@@ -230,8 +244,9 @@ public class altaEstablecimiento extends javax.swing.JFrame {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
         altaTambo alTambo = new altaTambo();
-        this.setVisible(false);
+        alTambo.setTitle("Alta de nuevo Tambo");
         alTambo.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_jButton3ActionPerformed
 
     /**

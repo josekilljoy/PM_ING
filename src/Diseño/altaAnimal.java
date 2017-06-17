@@ -5,6 +5,7 @@
  */
 package Diseño;
 
+import java.awt.Font;
 import javax.swing.JOptionPane;
 
 /**
@@ -19,7 +20,18 @@ public class altaAnimal extends javax.swing.JFrame {
     public altaAnimal() {
         initComponents();
         
-        setLocationRelativeTo(null);
+        super.setTitle("Alta de Animal");
+        
+        //Centra la ventana a la pantalla
+        super.setLocationRelativeTo(null);
+        
+        //Textos de ayuda
+        TextPrompt placeholder1 = new TextPrompt("Etiqueta del Animal", JTF_Etiqueta);
+        placeholder1.changeAlpha(0.75f);
+        placeholder1.changeStyle(Font.ITALIC);
+        TextPrompt placeholder2 = new TextPrompt("Raza del Animal", JTF_Raza);
+        placeholder2.changeAlpha(0.75f);
+        placeholder2.changeStyle(Font.ITALIC);
     }
 
     /**
@@ -34,11 +46,10 @@ public class altaAnimal extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         titalta = new javax.swing.JLabel();
         altatel = new javax.swing.JLabel();
-        nomtext = new javax.swing.JTextField();
-        teltex = new javax.swing.JTextField();
+        JTF_Etiqueta = new javax.swing.JTextField();
+        JTF_Raza = new javax.swing.JTextField();
         altabutt = new javax.swing.JButton();
         cancelbutt = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
         altanom = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -49,9 +60,9 @@ public class altaAnimal extends javax.swing.JFrame {
 
         altatel.setText("Raza:");
 
-        nomtext.addActionListener(new java.awt.event.ActionListener() {
+        JTF_Etiqueta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                nomtextActionPerformed(evt);
+                JTF_EtiquetaActionPerformed(evt);
             }
         });
 
@@ -70,50 +81,53 @@ public class altaAnimal extends javax.swing.JFrame {
         });
 
         altanom.setText("Etiqueta:");
-        jScrollPane1.setViewportView(altanom);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(21, 21, 21)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(titalta)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(10, 10, 10)
-                                .addComponent(altatel))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(altabutt)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(cancelbutt))
-                            .addComponent(teltex)
-                            .addComponent(nomtext, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(25, Short.MAX_VALUE))
+                                .addGap(21, 21, 21)
+                                .addComponent(altanom))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(altatel)))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addComponent(altabutt, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(cancelbutt, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(JTF_Etiqueta, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(JTF_Raza, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(21, 21, 21)
+                        .addComponent(titalta)))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(29, 29, 29)
+                .addGap(22, 22, 22)
                 .addComponent(titalta)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(nomtext, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(altatel)
-                    .addComponent(teltex, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(40, 40, 40)
+                    .addComponent(JTF_Etiqueta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(altanom))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(JTF_Raza, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(altatel))
+                .addGap(37, 37, 37)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(altabutt)
                     .addComponent(cancelbutt))
-                .addContainerGap(41, Short.MAX_VALUE))
+                .addContainerGap(28, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -136,21 +150,21 @@ public class altaAnimal extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void nomtextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nomtextActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_nomtextActionPerformed
-
-    private void altabuttActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_altabuttActionPerformed
-        // TODO add your handling code here:
-        
-        // Código de cargar el animal
-        JOptionPane.showMessageDialog(null, "Alta exitosa del animal");
-    }//GEN-LAST:event_altabuttActionPerformed
-
     private void cancelbuttActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelbuttActionPerformed
         // TODO add your handling code here:
         this.dispose();
     }//GEN-LAST:event_cancelbuttActionPerformed
+
+    private void altabuttActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_altabuttActionPerformed
+        // TODO add your handling code here:
+
+        // Código de cargar el animal
+        JOptionPane.showMessageDialog(null, "Alta exitosa del animal");
+    }//GEN-LAST:event_altabuttActionPerformed
+
+    private void JTF_EtiquetaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JTF_EtiquetaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_JTF_EtiquetaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -188,14 +202,13 @@ public class altaAnimal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField JTF_Etiqueta;
+    private javax.swing.JTextField JTF_Raza;
     private javax.swing.JButton altabutt;
     private javax.swing.JLabel altanom;
     private javax.swing.JLabel altatel;
     private javax.swing.JButton cancelbutt;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField nomtext;
-    private javax.swing.JTextField teltex;
     private javax.swing.JLabel titalta;
     // End of variables declaration//GEN-END:variables
 }

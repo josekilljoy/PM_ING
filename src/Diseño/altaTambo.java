@@ -5,6 +5,8 @@
  */
 package Diseño;
 
+import java.awt.Font;
+
 /**
  *
  * @author COMPUTER
@@ -17,7 +19,18 @@ public class altaTambo extends javax.swing.JFrame {
     public altaTambo() {
         initComponents();
         
-        setLocationRelativeTo(null);
+        super.setTitle("Alta de Tambo");
+        
+        //Modificamos la localización
+        super.setLocationRelativeTo(null);
+        
+        //Textos de ayuda
+        TextPrompt placeholder1 = new TextPrompt("Nombre del Tambo", JTF_Nombre);
+        placeholder1.changeAlpha(0.75f);
+        placeholder1.changeStyle(Font.ITALIC);
+        TextPrompt placeholder2 = new TextPrompt("Distribución del Tambo", JTF_Distribucion);
+        placeholder2.changeAlpha(0.75f);
+        placeholder2.changeStyle(Font.ITALIC);
     }
 
     /**
@@ -34,8 +47,8 @@ public class altaTambo extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
+        JTF_Nombre = new javax.swing.JTextField();
+        JTF_Distribucion = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
 
@@ -61,9 +74,9 @@ public class altaTambo extends javax.swing.JFrame {
             }
         });
 
-        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+        JTF_Distribucion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField2ActionPerformed(evt);
+                JTF_DistribucionActionPerformed(evt);
             }
         });
 
@@ -84,8 +97,8 @@ public class altaTambo extends javax.swing.JFrame {
                             .addComponent(jLabel3))
                         .addGap(59, 59, 59)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTextField2)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(JTF_Distribucion)
+                            .addComponent(JTF_Nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jButton3)
                         .addGap(61, 61, 61)
@@ -105,9 +118,9 @@ public class altaTambo extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(JTF_Nombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(JTF_Distribucion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel3))
                 .addGap(48, 48, 48)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -137,14 +150,15 @@ public class altaTambo extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+    private void JTF_DistribucionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JTF_DistribucionActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField2ActionPerformed
+    }//GEN-LAST:event_JTF_DistribucionActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
         
         altaAnimal altaAnim = new altaAnimal();
+        altaAnim.setTitle("Alta de nuevo Animal");
         this.setVisible(false);
         altaAnim.setVisible(true);
         
@@ -191,6 +205,8 @@ public class altaTambo extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField JTF_Distribucion;
+    private javax.swing.JTextField JTF_Nombre;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
@@ -198,7 +214,5 @@ public class altaTambo extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
     // End of variables declaration//GEN-END:variables
 }
