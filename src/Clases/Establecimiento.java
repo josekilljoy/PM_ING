@@ -13,6 +13,13 @@ import java.util.ArrayList;
  */
 public class Establecimiento {
 
+  private String nombre;
+	private String telefono;
+	private String ubicación;
+	private Productor m_Productor = new Productor();
+  private String idEstablecimiento;
+
+
     public String getNombre() {
         return nombre;
     }
