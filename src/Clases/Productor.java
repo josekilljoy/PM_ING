@@ -11,37 +11,7 @@ import java.util.ArrayList;
  *
  * @author Nelson
  */
-public class Productor {
-    private int idProductor;
-    private String nombre;
-    private int telefono;
-    private ArrayList<Establecimiento> establecimientos;
-    
-    //Constante que indica el nro de establecimientos creados
-    //Lo usaremos para asignar el nro de identificador de cada instancia
-    private static int NroEstablecimiento=0;
-    
-    // Constructor con el id del productor por defecto
-    public Productor(String nombre, int telefono) {        
-        this.nombre=nombre;
-        this.telefono=telefono;
-        this.establecimientos=new ArrayList<Establecimiento>();
-        
-        idProductor=NroEstablecimiento;        
-        NroEstablecimiento++;
-    }
-    
-    //Constructor por defecto
-    public Productor() {
-        idProductor=0;
-        nombre="";
-        telefono=0;
-        establecimientos=new ArrayList<Establecimiento>();
-        
-        idProductor=NroEstablecimiento;        
-        NroEstablecimiento++;
-    }
-    
+public class Productor {    
     /**
      * @return the nombre
      */
@@ -98,5 +68,41 @@ public class Productor {
         this.idProductor = idProductor;
     }
     
+    private int idProductor;
+    private String nombre;
+    private int telefono;
+    private ArrayList<Establecimiento> establecimientos;
     
+    //Constante que indica el nro de objetos instanciados
+    //Lo usaremos para asignar el nro de identificador de cada instancia
+    private static int NroEstablecimiento=0;
+    
+    // Constructor con el id del productor por defecto
+    public Productor(String nombre, int telefono) {        
+        this.nombre=nombre;
+        this.telefono=telefono;
+        this.establecimientos=new ArrayList<Establecimiento>();
+        
+        idProductor=NroEstablecimiento;        
+        NroEstablecimiento++;
+    }
+    
+    public Productor(String nombre, int telefono, ArrayList<Establecimiento> establecimientos) {        
+        this.nombre=nombre;
+        this.telefono=telefono;
+        this.establecimientos=establecimientos;
+        
+        idProductor=NroEstablecimiento;        
+        NroEstablecimiento++;
+    }
+    
+    //Constructor por defecto
+    public Productor() {
+        nombre="";
+        telefono=0;
+        establecimientos=new ArrayList<Establecimiento>();
+        
+        idProductor=NroEstablecimiento;        
+        NroEstablecimiento++;
+    }
 }

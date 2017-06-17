@@ -12,46 +12,6 @@ import java.util.ArrayList;
  * @author josekilljoy95
  */
 public class Establecimiento {
-        private int idEstablecimiento;
-    	private String nombre;
-	private int telefono;
-	private String ubicacion;
-	private ArrayList<Productor> productores;
-        
-        //Constante que indica el nro de establecimientos creados
-        //Lo usaremos para asignar el nro de identificador de cada instancia
-        private static int NroEstablecimiento=0;
-    
-    //Sin identificador del Establecimiento
-    public Establecimiento(String nombre, int telefono, String ubicacion) {
-        this.nombre = nombre;
-        this.telefono = telefono;
-        this.ubicacion = ubicacion;
-        this.productores = new ArrayList<Productor>();
-        
-        idEstablecimiento=NroEstablecimiento;        
-        NroEstablecimiento++;
-    }
-
-    public Establecimiento(String nombre, int telefono, String ubicacion, ArrayList<Productor> productores) {
-        this.nombre = nombre;
-        this.telefono = telefono;
-        this.ubicacion = ubicacion;
-        this.productores = productores;
-        
-        idEstablecimiento=NroEstablecimiento;
-        NroEstablecimiento++;
-    }
-    
-    public Establecimiento() {
-        this.nombre = "";
-        this.telefono = 0;
-        this.ubicacion = "";
-        this.productores = new ArrayList<Productor>();
-        
-        idEstablecimiento=NroEstablecimiento;
-        NroEstablecimiento++;
-    }
 
     public String getNombre() {
         return nombre;
@@ -105,4 +65,44 @@ public class Establecimiento {
         this.idEstablecimiento = idEstablecimiento;
     }
 
+    private int idEstablecimiento;
+    private String nombre;
+    private int telefono;
+    private String ubicacion;
+    private ArrayList<Productor> productores;
+
+    //Constante que indica el nro de establecimientos creados
+    //Lo usaremos para asignar el nro de identificador de cada instancia
+    private static int NroEstablecimiento=0;
+    
+    //Sin identificador del Establecimiento
+    public Establecimiento(String nombre, int telefono, String ubicacion) {
+        this.nombre = nombre;
+        this.telefono = telefono;
+        this.ubicacion = ubicacion;
+        this.productores = new ArrayList<Productor>();
+        
+        idEstablecimiento=NroEstablecimiento;        
+        NroEstablecimiento++;
+    }
+
+    public Establecimiento(String nombre, int telefono, String ubicacion, ArrayList<Productor> productores) {
+        this.nombre = nombre;
+        this.telefono = telefono;
+        this.ubicacion = ubicacion;
+        this.productores = productores;
+        
+        idEstablecimiento=NroEstablecimiento;
+        NroEstablecimiento++;
+    }
+    
+    public Establecimiento() {
+        this.nombre = "";
+        this.telefono = 0;
+        this.ubicacion = "";
+        this.productores = new ArrayList<Productor>();
+        
+        idEstablecimiento=NroEstablecimiento;
+        NroEstablecimiento++;
+    }
 }
