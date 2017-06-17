@@ -5,6 +5,9 @@
  */
 package Diseño;
 
+import java.awt.Font;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author COMPUTER
@@ -17,9 +20,59 @@ public class altaTambo extends javax.swing.JFrame {
     public altaTambo() {
         initComponents();
         
-        setLocationRelativeTo(null);
+        super.setTitle("Alta de Tambo");
+        
+        //Modificamos la localización
+        super.setLocationRelativeTo(null);
+        
+        //Textos de ayuda
+        TextPrompt placeholder1 = new TextPrompt("Nombre del Tambo", JTF_Nombre);
+        placeholder1.changeAlpha(0.75f);
+        placeholder1.changeStyle(Font.ITALIC);
+        TextPrompt placeholder2 = new TextPrompt("Distribución del Tambo", JTF_Distribucion);
+        placeholder2.changeAlpha(0.75f);
+        placeholder2.changeStyle(Font.ITALIC);
     }
 
+    
+    public String validarCampos() {
+        String error="";
+        String nombre="";
+        String distribucion="";
+        String datos="";
+        
+        if ( "".equals(JTF_Nombre.getText() )) {
+            error+="Falta ingresar Nombre\n";
+        }
+        if ( "".equals(JTF_Distribucion.getText() )) {
+            error+="Falta ingresar Distribucion\n";
+        }
+        
+        // Si no hubo errores
+        if ( "".equals(error) ) {
+            //Seleccionamos los datos ingresados
+            nombre=JTF_Nombre.getText();
+            distribucion=JTF_Distribucion.getText();
+            
+            datos+= "Nombre: " + nombre + "\nNombre: " + nombre + "\nDistribucion: " + distribucion;
+            
+            //Lo insertamos en la base de datos
+            /* COMPLETAR */
+            
+            // Mostramos el éxito de la operación
+            JOptionPane.showMessageDialog(null, "Alta del nuevo tambo exitosa: \n\n" + datos);
+            
+            //Seteamos los valores de los JTextField para que sean nulos de nuevo
+            JTF_Nombre.setText("");
+            JTF_Distribucion.setText("");            
+        }
+        else {
+            JOptionPane.showMessageDialog(null, error);
+        }
+        
+        return error;
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -30,12 +83,12 @@ public class altaTambo extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
+        JB_Guardar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
+        JB_Cancelar = new javax.swing.JButton();
+        JB_GuardarCargar = new javax.swing.JButton();
+        JTF_Nombre = new javax.swing.JTextField();
+        JTF_Distribucion = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
 
@@ -43,27 +96,32 @@ public class altaTambo extends javax.swing.JFrame {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        jButton1.setText("Guardar");
+        JB_Guardar.setText("Guardar");
+        JB_Guardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JB_GuardarActionPerformed(evt);
+            }
+        });
 
         jLabel1.setText("Ingrese los datos del tambo:");
 
-        jButton2.setText("Cancelar");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        JB_Cancelar.setText("Cancelar");
+        JB_Cancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                JB_CancelarActionPerformed(evt);
             }
         });
 
-        jButton3.setText("Guardar y cargar animales");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        JB_GuardarCargar.setText("Guardar y cargar animales");
+        JB_GuardarCargar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                JB_GuardarCargarActionPerformed(evt);
             }
         });
 
-        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+        JTF_Distribucion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField2ActionPerformed(evt);
+                JTF_DistribucionActionPerformed(evt);
             }
         });
 
@@ -84,36 +142,36 @@ public class altaTambo extends javax.swing.JFrame {
                             .addComponent(jLabel3))
                         .addGap(59, 59, 59)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTextField2)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(JTF_Distribucion)
+                            .addComponent(JTF_Nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jButton3)
+                        .addComponent(JB_GuardarCargar)
                         .addGap(61, 61, 61)
-                        .addComponent(jButton1)
+                        .addComponent(JB_Guardar)
                         .addGap(43, 43, 43)
-                        .addComponent(jButton2))
+                        .addComponent(JB_Cancelar))
                     .addComponent(jLabel1))
                 .addContainerGap(42, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(49, 49, 49)
+                .addGap(44, 44, 44)
                 .addComponent(jLabel1)
-                .addGap(13, 13, 13)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(JTF_Nombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(JTF_Distribucion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel3))
                 .addGap(48, 48, 48)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton3)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
+                    .addComponent(JB_GuardarCargar)
+                    .addComponent(JB_Guardar)
+                    .addComponent(JB_Cancelar))
                 .addContainerGap(54, Short.MAX_VALUE))
         );
 
@@ -137,23 +195,33 @@ public class altaTambo extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+    private void JTF_DistribucionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JTF_DistribucionActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField2ActionPerformed
+    }//GEN-LAST:event_JTF_DistribucionActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void JB_GuardarCargarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JB_GuardarCargarActionPerformed
         // TODO add your handling code here:
         
-        altaAnimal altaAnim = new altaAnimal();
-        this.setVisible(false);
-        altaAnim.setVisible(true);
+        String errores=validarCampos();
         
-    }//GEN-LAST:event_jButton3ActionPerformed
+        if ("".equals(errores)) {
+            altaAnimal altaAnim = new altaAnimal();
+            altaAnim.setTitle("Alta de nuevo Animal");
+            this.dispose();
+            altaAnim.setVisible(true);
+        }
+        
+    }//GEN-LAST:event_JB_GuardarCargarActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void JB_CancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JB_CancelarActionPerformed
         // TODO add your handling code here:
         this.dispose();
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_JB_CancelarActionPerformed
+
+    private void JB_GuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JB_GuardarActionPerformed
+        // TODO add your handling code here:
+        validarCampos();
+    }//GEN-LAST:event_JB_GuardarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -191,14 +259,14 @@ public class altaTambo extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton JB_Cancelar;
+    private javax.swing.JButton JB_Guardar;
+    private javax.swing.JButton JB_GuardarCargar;
+    private javax.swing.JTextField JTF_Distribucion;
+    private javax.swing.JTextField JTF_Nombre;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
     // End of variables declaration//GEN-END:variables
 }

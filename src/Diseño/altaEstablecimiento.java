@@ -5,6 +5,7 @@
  */
 package Diseño;
 
+import java.awt.Font;
 import javax.swing.JOptionPane;
 
 /**
@@ -19,14 +20,75 @@ public class altaEstablecimiento extends javax.swing.JFrame {
     public altaEstablecimiento() {
         initComponents();
         
+        super.setTitle("Alta de nuevo establecimiento");
+        
         //Centramos a la ventana
-        setLocationRelativeTo(null);
+        super.setLocationRelativeTo(null);
         
         //Que haga focus en este campo al iniciar la ventana
         JTF_Nombre.requestFocus();
         
+        //Texto de ayuda para rellenar los campos
+        TextPrompt placeholder1 = new TextPrompt("Nombre del Establecimiento", JTF_Nombre);
+        placeholder1.changeAlpha(0.75f);
+        placeholder1.changeStyle(Font.ITALIC);
+        TextPrompt placeholder2 = new TextPrompt("Teléfono del Establecimiento", JTF_Telefono);
+        placeholder2.changeAlpha(0.75f);
+        placeholder2.changeStyle(Font.ITALIC);
+        TextPrompt placeholder3 = new TextPrompt("Ubicación del Establecimiento", JTF_Ubicacion);
+        placeholder3.changeAlpha(0.75f);
+        placeholder3.changeStyle(Font.ITALIC);
+        
         // Cargamos la lista de productores
         //Completar...
+    }
+    
+    public String validarCampos() {
+        String error="", datos="";
+        
+        String nombre="";
+        String telefono="";
+        String ubicacion="";
+        String productor="";
+        
+        //Validamos los campos
+        if ( "".equals(JTF_Nombre.getText()) ) {
+            error+="Falta ingresar Nombre\n";
+        }
+        if ( "".equals(JTF_Telefono.getText()) ) {
+            error+="Falta ingresar Teléfono\n";
+        }
+        if ( "".equals(JTF_Ubicacion.getText()) ) {
+            error+="Falta ingresar Ubicación\n";
+        }
+        
+        //Si no hay errores
+        if ( "".equals(error) ) {
+            //Seleccionamos los datos ingresados
+            nombre=JTF_Nombre.getText();
+            telefono=JTF_Telefono.getText();
+            ubicacion=JTF_Ubicacion.getText();
+            productor=JCB_Productores.getItemAt(0);
+            
+            datos+= "Nombre: " + nombre + "\nTeléfono: " + telefono + "\nUbicación: " + ubicacion + "\nProductor: " + productor;
+            
+            //Lo insertamos en la base de datos
+            /* COMPLETAR */
+            
+            // Mostramos el éxito de la operación
+            JOptionPane.showMessageDialog(null, "Alta del nuevo establecimiento exitosa: \n\n" + datos);
+            
+            //Seteamos los valores de los JTextField para que sean nulos de nuevo
+            JTF_Nombre.setText("");
+            JTF_Telefono.setText("");
+            JTF_Ubicacion.setText("");
+        }
+        else {
+            //Mostramos mensaje de error de los campos
+            JOptionPane.showMessageDialog(null, error, "Error ingreso datos", HEIGHT);
+        }
+        
+        return error;
     }
 
     /**
@@ -45,7 +107,7 @@ public class altaEstablecimiento extends javax.swing.JFrame {
         JTF_Nombre = new javax.swing.JTextField();
         JTF_Telefono = new javax.swing.JTextField();
         JTF_Ubicacion = new javax.swing.JTextField();
-        JTF_NombreProductor = new javax.swing.JLabel();
+        JL_NombreProductor = new javax.swing.JLabel();
         JCB_Productores = new javax.swing.JComboBox<>();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
@@ -62,7 +124,7 @@ public class altaEstablecimiento extends javax.swing.JFrame {
 
         jLabel4.setText("Ubicación:");
 
-        JTF_NombreProductor.setText("Seleccione el Productor");
+        JL_NombreProductor.setText("Seleccione el Productor");
 
         JCB_Productores.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Productor 1", "Productor 2", "Productor 3", "Productor 4" }));
         JCB_Productores.addActionListener(new java.awt.event.ActionListener() {
@@ -108,7 +170,7 @@ public class altaEstablecimiento extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(JTF_NombreProductor)
+                                    .addComponent(JL_NombreProductor)
                                     .addComponent(jLabel4)
                                     .addComponent(jLabel2)
                                     .addComponent(jLabel3))
@@ -145,7 +207,7 @@ public class altaEstablecimiento extends javax.swing.JFrame {
                     .addComponent(JTF_Ubicacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(JTF_NombreProductor)
+                    .addComponent(JL_NombreProductor)
                     .addComponent(JCB_Productores, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 55, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -159,17 +221,17 @@ public class altaEstablecimiento extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(20, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(31, Short.MAX_VALUE))
+                .addGap(18, 18, 18))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(23, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addGap(22, 22, 22))
         );
 
         pack();
@@ -186,52 +248,24 @@ public class altaEstablecimiento extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        
-        String error="", datos="";
-        
-        String nombre="";
-        String telefono="";
-        String ubicacion="";
-        String productor="";
-        
-        //Validamos los campos
-        if ( "".equals(JTF_Nombre.getText()) ) {
-            error+="Falta ingresar Nombre\n";
-        }
-        if ( "".equals(JTF_Telefono.getText()) ) {
-            error+="Falta ingresar Teléfono\n";
-        }
-        if ( "".equals(JTF_Ubicacion.getText()) ) {
-            error+="Falta ingresar Ubicación\n";
-        }
-        
-        //Si no hay errores
-        if ( "".equals(error) ) {
-            //Seleccionamos los datos ingresados
-            nombre=JTF_Nombre.getText();
-            telefono=JTF_Telefono.getText();
-            ubicacion=JTF_Ubicacion.getText();
-            productor=JCB_Productores.getItemAt(0);
-            
-            datos+= "Nombre: " + nombre + "\nTeléfono: " + telefono + "\nUbicación: " + ubicacion + "\nProductor: " + productor;
-            
-            //Lo insertamos en la base de datos
-            //Completar...
-            
-            // Mostramos el éxito de la operación
-            JOptionPane.showMessageDialog(null, "Alta del nuevo establecimiento exitosa: \n" + datos);
-        }
-        else {
-            //Mostramos mensaje de error de los campos
-            JOptionPane.showMessageDialog(null, error, "Error ingreso datos", HEIGHT);
-        }
+        validarCampos();        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        altaTambo alTambo = new altaTambo();
-        this.setVisible(false);
-        alTambo.setVisible(true);
+        
+        String error="";
+        
+        error=validarCampos();
+        
+        //Si no hubo errores
+        if ("".equals(error)) {
+            altaTambo alTambo = new altaTambo();
+            alTambo.setTitle("Alta de nuevo Tambo");
+            alTambo.setVisible(true);
+            this.dispose();
+        }
+        
     }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
@@ -271,8 +305,8 @@ public class altaEstablecimiento extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> JCB_Productores;
+    private javax.swing.JLabel JL_NombreProductor;
     private javax.swing.JTextField JTF_Nombre;
-    private javax.swing.JLabel JTF_NombreProductor;
     private javax.swing.JTextField JTF_Telefono;
     private javax.swing.JTextField JTF_Ubicacion;
     private javax.swing.JButton jButton1;

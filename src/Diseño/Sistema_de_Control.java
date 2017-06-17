@@ -686,6 +686,7 @@ public class Sistema_de_Control extends javax.swing.JFrame {
         if (JRB_AgregarEstablecimiento.isSelected()) {
             // Ejecutar la Ventana AltaEstablecimiento
             altaEstablecimiento altaEs = new altaEstablecimiento();
+            altaEs.setTitle("Alta de nuevo establecimiento");
             altaEs.setVisible(true);
         }
         
