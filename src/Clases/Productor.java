@@ -105,4 +105,5 @@ public class Productor {
         idProductor=NroEstablecimiento;        
         NroEstablecimiento++;
     }
+    
 }

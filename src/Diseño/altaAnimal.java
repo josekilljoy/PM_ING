@@ -34,6 +34,19 @@ public class altaAnimal extends javax.swing.JFrame {
         placeholder2.changeStyle(Font.ITALIC);
     }
 
+    public String validarCampos() {
+        String error="";
+        
+        if ("".equals(JTF_Etiqueta.getText())) {
+            error+="Falta ingresar Etiqueta\n";
+        }
+        if ("".equals(JTF_Raza.getText())) {
+            error+="Falta ingresar Raza\n";
+        }
+        
+        return error;
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -56,7 +69,7 @@ public class altaAnimal extends javax.swing.JFrame {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        titalta.setText("Ingrese los datos del Animal.");
+        titalta.setText("Ingrese los datos del Animal:");
 
         altatel.setText("Raza:");
 
@@ -157,9 +170,28 @@ public class altaAnimal extends javax.swing.JFrame {
 
     private void altabuttActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_altabuttActionPerformed
         // TODO add your handling code here:
-
-        // Código de cargar el animal
-        JOptionPane.showMessageDialog(null, "Alta exitosa del animal");
+        String errores=validarCampos();
+        
+        //Sin errores
+        if ("".equals(errores)) {
+            String etiqueta="", raza="";
+            
+            etiqueta=JTF_Etiqueta.getText();
+            raza=JTF_Raza.getText();
+            
+            //Lo insertamos en la BD
+            /* COMPLETAR */
+            
+            //Notificamos de la operación exitosa
+            JOptionPane.showMessageDialog(null, "Alta de nuevo Animal exitosa: \n\nEtiqueta: " + etiqueta + "\nRaza: " + raza);
+            
+            //Vaciamos los campos
+            JTF_Etiqueta.setText("");
+            JTF_Raza.setText("");
+        }
+        else {
+            JOptionPane.showMessageDialog(null, errores);
+        }
     }//GEN-LAST:event_altabuttActionPerformed
 
     private void JTF_EtiquetaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JTF_EtiquetaActionPerformed

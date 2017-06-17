@@ -116,7 +116,7 @@
       <SubComponents>
         <Component class="javax.swing.JLabel" name="titalta">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Ingrese los datos del Animal."/>
+            <Property name="text" type="java.lang.String" value="Ingrese los datos del Animal:"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="altatel">
