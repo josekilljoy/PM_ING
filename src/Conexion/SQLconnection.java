@@ -5,6 +5,7 @@
  */
 package Conexion;
 
+import Clases.Productor;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -42,7 +43,7 @@ public class SQLconnection {
         return conn;
     }
     
-    //Método genérico que recibe un String con una query en SQL
+    /* Método genérico que devuelve el resultado de una consulta en SQL */
     public ResultSet executeQuery(String query) {
         ResultSet rs=null;
         Statement s=null;
@@ -52,16 +53,42 @@ public class SQLconnection {
             rs=s.executeQuery(query);
         }
         catch(SQLException e) {
-            System.out.println("Error executeQuery!");
+            System.out.println("Error executeQuery! " + e.getErrorCode());
         }
         
         return rs;
     }
     
-    //Devuelve todos los productores de la BD
+    /* Método genérico para realizar las Altas/Bajas y Modificaciones en SQL */
+    public boolean updateQuery(String query) {
+        boolean exito=false;
+        Statement s=null;
+        
+         try {
+            s=conn.createStatement();
+            s.executeUpdate(query);
+            exito=true;
+        }
+        catch(SQLException e) {
+            System.out.println("Error updateBaseDeDatos! " + e.getErrorCode());
+        }
+        
+        return exito;
+    }
+    
+    // OBTENER TODOS LOS PRODUCTORES
     public ResultSet getProductores() {
-        ResultSet rs=executeQuery("SELECT * FROM productor");
+        ResultSet rs=executeQuery("SELECT * FROM Productor");
         
         return rs;
     }
+    
+    // ALTA DE PRODUCTOR
+    public boolean insertarProductor(Productor p) {
+        String query = "INSERT INTO Productor VALUES ( '" + p.getNombre() + "','" + p.getTelefono() + "'," + p.getIdProductor() + " )";        
+        boolean exito=updateQuery(query);
+        
+        return exito;
+    }
+   
 }
