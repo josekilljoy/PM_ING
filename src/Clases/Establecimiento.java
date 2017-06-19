@@ -5,25 +5,34 @@
  */
 package Clases;
 
-import java.util.ArrayList;
-
 /**
  *
  * @author josekilljoy95
  */
 public class Establecimiento {
 
-  private String nombre;
-	private String telefono;
-	private String ubicación;
-	private Productor m_Productor = new Productor();
-        private String Cod_E;
+    private String nombre;
+    private String telefono;
+    private String ubicación;
+    private String codProductor;
+    private String Cod_E;
+    
+    private static int NroEstablecimiento=0;
 
     public Establecimiento(String nombre, String telefono, String ubicación, String Cod_E) {
         this.nombre = nombre;
         this.telefono = telefono;
         this.ubicación = ubicación;
         this.Cod_E = Cod_E;
+    }
+    
+    public Establecimiento(String nombre, String telefono, String ubicación) {
+        this.nombre = nombre;
+        this.telefono = telefono;
+        this.ubicación = ubicación;
+        this.Cod_E = Integer.toString(NroEstablecimiento);
+        
+        NroEstablecimiento++;
     }
 
     public Establecimiento() {
@@ -39,10 +48,6 @@ public class Establecimiento {
 
     public String getUbicación() {
         return ubicación;
-    }
-
-    public Productor getM_Productor() {
-        return m_Productor;
     }
 
     public String getCod_E() {
@@ -61,12 +66,22 @@ public class Establecimiento {
         this.ubicación = ubicación;
     }
 
-    public void setM_Productor(Productor m_Productor) {
-        this.m_Productor = m_Productor;
-    }
-
     public void setCod_E(String Cod_E) {
         this.Cod_E = Cod_E;
+    }
+
+    /**
+     * @return the codProductor
+     */
+    public String getCodProductor() {
+        return codProductor;
+    }
+
+    /**
+     * @param codProductor the codProductor to set
+     */
+    public void setCodProductor(String codProductor) {
+        this.codProductor = codProductor;
     }
     
     

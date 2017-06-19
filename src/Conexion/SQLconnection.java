@@ -70,7 +70,7 @@ public class SQLconnection {
             exito=true;
         }
         catch(SQLException e) {
-            System.out.println("Error updateBaseDeDatos! " + e.getErrorCode());
+            System.out.println("Error updateQuery! " + e.getErrorCode());
         }
         
         return exito;
