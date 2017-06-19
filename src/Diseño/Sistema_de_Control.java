@@ -149,6 +149,11 @@ public class Sistema_de_Control extends javax.swing.JFrame {
         buttelimprodu.setText("Eliminar productor.");
 
         JB_Prod_Aceptar.setText("Aceptar");
+        JB_Prod_Aceptar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JB_Prod_AceptarActionPerformed(evt);
+            }
+        });
 
         jLabel2.setText("Seleccione la consulta a realizar:");
 
@@ -661,6 +666,8 @@ public class Sistema_de_Control extends javax.swing.JFrame {
 
     private void buttaltaproduActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttaltaproduActionPerformed
         // TODO add your handling code here:
+        
+        
     }//GEN-LAST:event_buttaltaproduActionPerformed
 
     private void JRB_Prod_PertenenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JRB_Prod_PertenenciaActionPerformed
@@ -690,6 +697,17 @@ public class Sistema_de_Control extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_JB_Estab_AceptarActionPerformed
+
+    private void JB_Prod_AceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JB_Prod_AceptarActionPerformed
+        // TODO add your handling code here:
+        
+        if (buttaltaprodu.isSelected()) {
+            altaProductor ap=new altaProductor();
+            ap.setTitle("Alta de nuevo productor");
+            ap.setLocationRelativeTo(null);
+            ap.setVisible(true);
+        }
+    }//GEN-LAST:event_JB_Prod_AceptarActionPerformed
 
     /**
      * @param args the command line arguments

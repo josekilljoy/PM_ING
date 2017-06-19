@@ -11,63 +11,46 @@ package Clases;
  */
 public class Establecimiento {
 
-    private String nombre;
-    private String telefono;
-    private String ubicación;
-    private String codProductor;
-    private String Cod_E;
-    
-    private static int NroEstablecimiento=0;
-
-    public Establecimiento(String nombre, String telefono, String ubicación, String Cod_E) {
-        this.nombre = nombre;
-        this.telefono = telefono;
-        this.ubicación = ubicación;
-        this.Cod_E = Cod_E;
-    }
-    
-    public Establecimiento(String nombre, String telefono, String ubicación) {
-        this.nombre = nombre;
-        this.telefono = telefono;
-        this.ubicación = ubicación;
-        this.Cod_E = Integer.toString(NroEstablecimiento);
-        
-        NroEstablecimiento++;
-    }
-
-    public Establecimiento() {
-    }
-
+    /**
+     * @return the nombre
+     */
     public String getNombre() {
         return nombre;
     }
 
-    public String getTelefono() {
-        return telefono;
-    }
-
-    public String getUbicación() {
-        return ubicación;
-    }
-
-    public String getCod_E() {
-        return Cod_E;
-    }
-
+    /**
+     * @param nombre the nombre to set
+     */
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
 
+    /**
+     * @return the telefono
+     */
+    public String getTelefono() {
+        return telefono;
+    }
+
+    /**
+     * @param telefono the telefono to set
+     */
     public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
 
-    public void setUbicación(String ubicación) {
-        this.ubicación = ubicación;
+    /**
+     * @return the ubicación
+     */
+    public String getUbicación() {
+        return ubicación;
     }
 
-    public void setCod_E(String Cod_E) {
-        this.Cod_E = Cod_E;
+    /**
+     * @param ubicación the ubicación to set
+     */
+    public void setUbicación(String ubicación) {
+        this.ubicación = ubicación;
     }
 
     /**
@@ -83,9 +66,36 @@ public class Establecimiento {
     public void setCodProductor(String codProductor) {
         this.codProductor = codProductor;
     }
-    
-    
-        
 
+    /**
+     * @return the Cod_E
+     */
+    public String getCod_E() {
+        return Cod_E;
+    }
 
+    /**
+     * @param Cod_E the Cod_E to set
+     */
+    public void setCod_E(String Cod_E) {
+        this.Cod_E = Cod_E;
+    }
+
+    private String nombre;
+    private String telefono;
+    private String ubicación;
+    private String codProductor;
+    private String Cod_E;
+    
+    public Establecimiento(String nombre, String telefono, String ubicación, String codProductor, String Cod_E) {
+        this.nombre = nombre;
+        this.telefono = telefono;
+        this.ubicación = ubicación;
+        this.codProductor = codProductor;
+        this.Cod_E = Cod_E;
+    }
+    
+    public Establecimiento() {
+    }
+    
 }

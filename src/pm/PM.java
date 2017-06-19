@@ -47,7 +47,7 @@ public class PM {
         SQLconnection conn = new SQLconnection();
         conn.connect();
         
-        ResultSet rs=conn.getProductores();
+        ResultSet rs=conn.getProductoresResult();
         String cadena="";
         try {
             while (rs.next()) {
@@ -58,9 +58,6 @@ public class PM {
         }
         
         System.out.println(cadena);
-        
-        Productor p = new Productor("Nelson", "98765");
-        p.setIdProductor("6");
         
     }
     

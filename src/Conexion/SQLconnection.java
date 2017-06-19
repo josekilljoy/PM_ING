@@ -11,6 +11,8 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -41,6 +43,14 @@ public class SQLconnection {
         }        
         
         return conn;
+    }
+    
+    public void close() {
+        try {
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(SQLconnection.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     /* Método genérico que devuelve el resultado de una consulta en SQL */
@@ -77,15 +87,23 @@ public class SQLconnection {
     }
     
     // OBTENER TODOS LOS PRODUCTORES
-    public ResultSet getProductores() {
+    public ResultSet getProductoresResult() {
         ResultSet rs=executeQuery("SELECT * FROM Productor");
         
         return rs;
     }
     
-    // ALTA DE PRODUCTOR
-    public boolean insertarProductor(Productor p) {
-        String query = "INSERT INTO Productor VALUES ( '" + p.getNombre() + "','" + p.getTelefono() + "'," + p.getIdProductor() + " )";        
+    // ALTA PRODUCTOR
+    public boolean insertProductor(Productor p) {
+        String query = "INSERT INTO Productor VALUES ( '" + p.getNombre() + "','" + p.getTelefono() + "'," + p.getCodProductor() + " )";        
+        boolean exito=updateQuery(query);
+        
+        return exito;
+    }
+    
+    // ALTA PRODUCTOR   
+    public boolean insertProductor(String codigo, String nombre, String telefono) {
+        String query="INSERT INTO Productor VALUES ( '"+nombre+"' , '"+telefono+"', '"+codigo+"' )";
         boolean exito=updateQuery(query);
         
         return exito;
