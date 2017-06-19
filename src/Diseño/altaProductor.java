@@ -15,7 +15,7 @@ import javax.swing.JOptionPane;
  * @author COMPUTER
  */
 public class altaProductor extends javax.swing.JFrame {
-
+    
     /**
      * Creates new form altaProductor
      */
@@ -191,10 +191,9 @@ public class altaProductor extends javax.swing.JFrame {
             msj+="Nombre: " + JTF_Nombre.getText() + "\n";
             msj+="Teléfono: " + JTF_Telefono.getText() + "\n";
             
-            /* INSERTAR EN LA BASE DE DATOS */
-            SQLconnection conn=new SQLconnection();            
-            conn.connect();
-            conn.insertProductor(JTF_Codigo.getText(), JTF_Nombre.getText(), JTF_Telefono.getText());
+            Productor p = new Productor( JTF_Codigo.getText(), JTF_Nombre.getText(), JTF_Telefono.getText() );
+            
+            darAlta(p);
             
             /* MENSAJE DE ALTA EXITOSA */
             JOptionPane.showMessageDialog(null, msj);
@@ -205,7 +204,7 @@ public class altaProductor extends javax.swing.JFrame {
             JTF_Telefono.setText("");
             
             /* CERRAMOS LA CONEXION */
-            conn.close();
+            
         }
         else {
             JOptionPane.showMessageDialog(null, error);
@@ -246,6 +245,18 @@ public class altaProductor extends javax.swing.JFrame {
                 new altaProductor().setVisible(true);
             }
         });
+    }
+    
+    public boolean darAlta(Productor p) {
+        boolean exito=false;
+        
+        /* INSERTAR EN LA BASE DE DATOS */
+        SQLconnection conn=new SQLconnection();            
+        conn.connect();
+        exito=conn.insertProductor(p);        
+        
+        return exito;
+        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

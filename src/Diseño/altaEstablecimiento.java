@@ -30,8 +30,9 @@ public class altaEstablecimiento extends javax.swing.JFrame {
         ResultSet rs = conn.getProductoresResult();
         
         try {
+            JCB_Productores.addItem( "Seleccione Productor" );
             while ( rs.next() ) {
-                JCB_Productores.addItem(rs.getString(1));
+                JCB_Productores.addItem( rs.getString(3) + " / " + rs.getString(1) );
             }
         } catch (SQLException ex) {
             Logger.getLogger(altaEstablecimiento.class.getName()).log(Level.SEVERE, null, ex);
