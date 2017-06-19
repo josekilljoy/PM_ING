@@ -57,17 +57,31 @@ public class Animal {
     private String nombre;
     private String raza;
     private String etiqueta;
+    private String codTambo;
     
-    public Animal(String nombre, String raza, String etiqueta) {
+    public Animal(String nombre, String raza, String etiqueta, String codTambo) {
         this.nombre=nombre;
         this.etiqueta=etiqueta;
         this.raza=raza;
+        this.codTambo=codTambo;
     }
     
     //Constructor por defecto
     public Animal() {
-        etiqueta="";
-        raza="";
+    }
+
+    /**
+     * @return the codTambo
+     */
+    public String getCodTambo() {
+        return codTambo;
+    }
+
+    /**
+     * @param codTambo the codTambo to set
+     */
+    public void setCodTambo(String codTambo) {
+        this.codTambo = codTambo;
     }
    
 }

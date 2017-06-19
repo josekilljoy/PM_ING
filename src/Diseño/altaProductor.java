@@ -5,6 +5,11 @@
  */
 package Diseño;
 
+import Clases.Productor;
+import Conexion.SQLconnection;
+import java.awt.Font;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author COMPUTER
@@ -16,8 +21,34 @@ public class altaProductor extends javax.swing.JFrame {
      */
     public altaProductor() {
         initComponents();
+        
+        TextPrompt placeholder = new TextPrompt("Código del Productor", JTF_Codigo);
+        placeholder.changeAlpha(0.75f);
+        placeholder.changeStyle(Font.ITALIC);
+        TextPrompt placeholder1 = new TextPrompt("Nombre del Productor", JTF_Nombre);
+        placeholder1.changeAlpha(0.75f);
+        placeholder1.changeStyle(Font.ITALIC);
+        TextPrompt placeholder2 = new TextPrompt("Teléfono del Productor", JTF_Telefono);
+        placeholder2.changeAlpha(0.75f);
+        placeholder2.changeStyle(Font.ITALIC);
     }
 
+    public String validarCampos() {
+        String error="";
+        
+        if (JTF_Codigo.getText().equals("")) {
+            error+="Falta ingresar código\n";
+        }
+        if (JTF_Nombre.getText().equals("")) {
+            error+="Falta ingresar nombre\n";
+        }
+        if (JTF_Telefono.getText().equals("")) {
+            error+="Falta ingresar telefono\n";
+        }
+        
+        return error;
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -30,73 +61,95 @@ public class altaProductor extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         titalta = new javax.swing.JLabel();
         altatel = new javax.swing.JLabel();
-        nomtext = new javax.swing.JTextField();
-        teltex = new javax.swing.JTextField();
+        JTF_Nombre = new javax.swing.JTextField();
+        JTF_Telefono = new javax.swing.JTextField();
         altabutt = new javax.swing.JButton();
         cancelbutt = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
+        jLabel1 = new javax.swing.JLabel();
+        JTF_Codigo = new javax.swing.JTextField();
         altanom = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        titalta.setText("Ingrese los datos del productor.");
+        jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        titalta.setText("Ingrese los datos del productor:");
 
         altatel.setText("Teléfono:");
 
-        nomtext.addActionListener(new java.awt.event.ActionListener() {
+        JTF_Nombre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                nomtextActionPerformed(evt);
+                JTF_NombreActionPerformed(evt);
             }
         });
 
         altabutt.setText("Cargar");
+        altabutt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                altabuttActionPerformed(evt);
+            }
+        });
 
         cancelbutt.setText("Cancelar");
+        cancelbutt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelbuttActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setText("Código:");
 
         altanom.setText("Nombre:");
-        jScrollPane1.setViewportView(altanom);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(22, 22, 22)
+                .addGap(38, 38, 38)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(titalta)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(10, 10, 10)
-                                .addComponent(altatel))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(altabutt)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 112, Short.MAX_VALUE)
-                                .addComponent(cancelbutt))
-                            .addComponent(teltex)
-                            .addComponent(nomtext))))
-                .addContainerGap(80, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(altatel)
+                                .addComponent(altanom)
+                                .addComponent(jLabel1))
+                            .addGap(18, 18, 18)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(JTF_Nombre)
+                                    .addComponent(JTF_Telefono, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(JTF_Codigo, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addGap(131, 131, 131)
+                            .addComponent(altabutt, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(cancelbutt))))
+                .addContainerGap(46, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(titalta)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(nomtext, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(JTF_Codigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(JTF_Nombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(altanom))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(altatel)
-                    .addComponent(teltex, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(40, 40, 40)
+                    .addComponent(JTF_Telefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(altabutt)
                     .addComponent(cancelbutt))
-                .addGap(0, 118, Short.MAX_VALUE))
+                .addGap(95, 95, 95))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -105,23 +158,60 @@ public class altaProductor extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void nomtextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nomtextActionPerformed
+    private void JTF_NombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JTF_NombreActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_nomtextActionPerformed
+    }//GEN-LAST:event_JTF_NombreActionPerformed
+
+    private void cancelbuttActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelbuttActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_cancelbuttActionPerformed
+
+    private void altabuttActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_altabuttActionPerformed
+        // TODO add your handling code here:
+        
+        String error=validarCampos();
+        if (error.equals("")) {
+            String msj="Alta exitosa de productor:\n\n";
+            msj+="Código: " + JTF_Codigo.getText() + "\n";
+            msj+="Nombre: " + JTF_Nombre.getText() + "\n";
+            msj+="Teléfono: " + JTF_Telefono.getText() + "\n";
+            
+            /* INSERTAR EN LA BASE DE DATOS */
+            SQLconnection conn=new SQLconnection();            
+            conn.connect();
+            conn.insertProductor(JTF_Codigo.getText(), JTF_Nombre.getText(), JTF_Telefono.getText());
+            
+            /* MENSAJE DE ALTA EXITOSA */
+            JOptionPane.showMessageDialog(null, msj);
+            
+            /* SETEAMOS LOS CAMPOS DE TEXTO*/
+            JTF_Codigo.setText("");
+            JTF_Nombre.setText("");
+            JTF_Telefono.setText("");
+            
+            /* CERRAMOS LA CONEXION */
+            conn.close();
+        }
+        else {
+            JOptionPane.showMessageDialog(null, error);
+        }
+        
+    }//GEN-LAST:event_altabuttActionPerformed
 
     /**
      * @param args the command line arguments
@@ -159,14 +249,15 @@ public class altaProductor extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField JTF_Codigo;
+    private javax.swing.JTextField JTF_Nombre;
+    private javax.swing.JTextField JTF_Telefono;
     private javax.swing.JButton altabutt;
     private javax.swing.JLabel altanom;
     private javax.swing.JLabel altatel;
     private javax.swing.JButton cancelbutt;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField nomtext;
-    private javax.swing.JTextField teltex;
     private javax.swing.JLabel titalta;
     // End of variables declaration//GEN-END:variables
 }

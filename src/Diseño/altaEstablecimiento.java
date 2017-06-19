@@ -27,7 +27,7 @@ public class altaEstablecimiento extends javax.swing.JFrame {
         /* Seleccionamos los productores de toda la BD */
         SQLconnection conn= new SQLconnection();
         conn.connect();
-        ResultSet rs = conn.getProductores();
+        ResultSet rs = conn.getProductoresResult();
         
         try {
             while ( rs.next() ) {

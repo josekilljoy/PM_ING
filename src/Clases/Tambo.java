@@ -5,8 +5,6 @@
  */
 package Clases;
 
-import java.util.ArrayList;
-
 /**
  *
  * @author Nelson
@@ -14,17 +12,17 @@ import java.util.ArrayList;
 public class Tambo {
 
     /**
-     * @return the idTambo
+     * @return the codTambo
      */
-    public int getIdTambo() {
-        return idTambo;
+    public String getCodTambo() {
+        return codTambo;
     }
 
     /**
-     * @param idTambo the idTambo to set
+     * @param codTambo the codTambo to set
      */
-    public void setIdTambo(int idTambo) {
-        this.idTambo = idTambo;
+    public void setCodTambo(String codTambo) {
+        this.codTambo = codTambo;
     }
 
     /**
@@ -55,43 +53,35 @@ public class Tambo {
         this.nombre = nombre;
     }
     
-    private int idTambo;
-    private String distribucion;
+    private String codTambo;
     private String nombre;
-    
-    private static int NroTambo=0;
+    private String distribucion;
+    private String codEmpleado;
     
     //Constructor principal
-    public Tambo(String nombre, String distribucion) {
+    public Tambo(String codTambo, String nombre, String distribucion, String codEmpleado) {
+        this.codTambo=codTambo;
         this.nombre=nombre;
-        this.distribucion=distribucion;
-        
-        idTambo=NroTambo;
-        NroTambo++;
-    }
-    
-    public Tambo(String nombre, String distribucion, ArrayList<Animal> animales) {
-        this.nombre=nombre;
-        this.distribucion=distribucion;
-        
-        idTambo=NroTambo;
-        NroTambo++;
-    }
-    
-    //Constructor que se usa para le lectura un Tambo desde la base de datos
-    public Tambo(int idTambo, String nombre, String distribucion, ArrayList<Animal> animales) {
-        this.idTambo=idTambo;
-        this.nombre=nombre;
-        this.distribucion=distribucion;
+        this.distribucion=distribucion;        
+        this.codEmpleado=codEmpleado;
     }
     
     //Constructor por defecto
     public Tambo() {
-        this.nombre="";
-        this.distribucion="";
-        
-        idTambo=NroTambo;
-        NroTambo++;
+    }
+
+    /**
+     * @return the codEmpleado
+     */
+    public String getCodEmpleado() {
+        return codEmpleado;
+    }
+
+    /**
+     * @param codEmpleado the codEmpleado to set
+     */
+    public void setCodEmpleado(String codEmpleado) {
+        this.codEmpleado = codEmpleado;
     }
     
 }
