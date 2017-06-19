@@ -6,6 +6,7 @@
 package pm;
 
 import Clases.Establecimiento;
+import Clases.Productor;
 import Conexion.SQLconnection;
 import Diseño.Sistema_de_Control;
 import java.sql.ResultSet;
@@ -35,13 +36,13 @@ public class PM {
         s.setVisible(true);
         
         Establecimiento es = new Establecimiento();
-        es.getIdEstablecimiento();
+       // es.getIdEstablecimiento();
         
         Establecimiento es2 = new Establecimiento();
-        es2.getIdEstablecimiento();
+        //es2.getIdEstablecimiento();
         
         Establecimiento es3 = new Establecimiento();
-        es3.getIdEstablecimiento();
+        //es3.getIdEstablecimiento();
         
         SQLconnection conn = new SQLconnection();
         conn.connect();
@@ -57,6 +58,9 @@ public class PM {
         }
         
         System.out.println(cadena);
+        
+        Productor p = new Productor("Nelson", "98765");
+        p.setIdProductor("6");
         
     }
     

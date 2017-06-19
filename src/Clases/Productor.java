@@ -29,88 +29,69 @@ public class Productor {
     /**
      * @return the telefono
      */
-    public int getTelefono() {
+    public String getTelefono() {
         return telefono;
     }
 
     /**
      * @param telefono the telefono to set
      */
-    public void setTelefono(int telefono) {
+    public void setTelefono(String telefono) {
         this.telefono = telefono;
-    }
-
-    /**
-     * @return the establecimientos
-     */
-    public ArrayList<Establecimiento> getEstablecimientos() {
-        return establecimientos;
-    }
-
-    /**
-     * @param establecimientos the establecimientos to set
-     */
-    public void setEstablecimientos(ArrayList<Establecimiento> establecimientos) {
-        this.establecimientos = establecimientos;
     }
 
     /**
      * @return the idProductor
      */
-    public int getIdProductor() {
+    public String getIdProductor() {
         return idProductor;
     }
 
     /**
      * @param idProductor the idProductor to set
      */
-    public void setIdProductor(int idProductor) {
+    public void setIdProductor(String idProductor) {
         this.idProductor = idProductor;
     }
     
-    private int idProductor;
+    private String idProductor;
     private String nombre;
-    private int telefono;
-    private ArrayList<Establecimiento> establecimientos;
+    private String telefono;
     
     //Constante que indica el nro de objetos instanciados
     //Lo usaremos para asignar el nro de identificador de cada instancia
     private static int NroEstablecimiento=0;
     
     // Constructor con el id del productor por defecto
-    public Productor(String nombre, int telefono) {        
+    public Productor(String nombre, String telefono) {        
         this.nombre=nombre;
         this.telefono=telefono;
-        this.establecimientos=new ArrayList<Establecimiento>();
         
-        idProductor=NroEstablecimiento;        
+        idProductor=Integer.toString(NroEstablecimiento);
         NroEstablecimiento++;
     }
     
-    public Productor(String nombre, int telefono, ArrayList<Establecimiento> establecimientos) {        
+    public Productor(String nombre, String telefono, ArrayList<Establecimiento> establecimientos) {        
         this.nombre=nombre;
         this.telefono=telefono;
-        this.establecimientos=establecimientos;
         
-        idProductor=NroEstablecimiento;        
+        idProductor=Integer.toString(NroEstablecimiento);
         NroEstablecimiento++;
     }
     
     //Constructor que se usa para le lectura un Productor desde la base de datos
-    public Productor(int idProductor, String nombre, int telefono, ArrayList<Establecimiento> establecimientos) {        
+    public Productor(String idProductor, String nombre, String telefono, ArrayList<Establecimiento> establecimientos) {        
         this.idProductor=idProductor;
         this.nombre=nombre;
         this.telefono=telefono;
-        this.establecimientos=establecimientos;
     }
     
     //Constructor por defecto
     public Productor() {
         nombre="";
-        telefono=0;
-        establecimientos=new ArrayList<Establecimiento>();
+        telefono="";
         
-        idProductor=NroEstablecimiento;        
+        idProductor=Integer.toString(NroEstablecimiento);
         NroEstablecimiento++;
     }
     

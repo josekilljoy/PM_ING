@@ -5,7 +5,12 @@
  */
 package Diseño;
 
+import Conexion.SQLconnection;
 import java.awt.Font;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -13,12 +18,24 @@ import javax.swing.JOptionPane;
  * @author COMPUTER
  */
 public class altaEstablecimiento extends javax.swing.JFrame {
-
     /**
      * Creates new form altaEstablecimiento
      */
     public altaEstablecimiento() {
         initComponents();
+        
+        /* Seleccionamos los productores de toda la BD */
+        SQLconnection conn= new SQLconnection();
+        conn.connect();
+        ResultSet rs = conn.getProductores();
+        
+        try {
+            while ( rs.next() ) {
+                JCB_Productores.addItem(rs.getString(1));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(altaEstablecimiento.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
         super.setTitle("Alta de nuevo establecimiento");
         
@@ -26,9 +43,12 @@ public class altaEstablecimiento extends javax.swing.JFrame {
         super.setLocationRelativeTo(null);
         
         //Que haga focus en este campo al iniciar la ventana
-        JTF_Nombre.requestFocus();
+        JTF_Codigo.requestFocus();
         
         //Texto de ayuda para rellenar los campos
+        TextPrompt placeholder = new TextPrompt("Código del Establecimiento", JTF_Codigo);
+        placeholder.changeAlpha(0.75f);
+        placeholder.changeStyle(Font.ITALIC);
         TextPrompt placeholder1 = new TextPrompt("Nombre del Establecimiento", JTF_Nombre);
         placeholder1.changeAlpha(0.75f);
         placeholder1.changeStyle(Font.ITALIC);
@@ -39,19 +59,21 @@ public class altaEstablecimiento extends javax.swing.JFrame {
         placeholder3.changeAlpha(0.75f);
         placeholder3.changeStyle(Font.ITALIC);
         
-        // Cargamos la lista de productores
-        //Completar...
     }
     
     public String validarCampos() {
         String error="", datos="";
         
+        String codigo="";
         String nombre="";
         String telefono="";
         String ubicacion="";
         String productor="";
         
         //Validamos los campos
+        if ( "".equals(JTF_Codigo.getText()) ) {
+            error+="Falta ingresar Código\n";
+        }
         if ( "".equals(JTF_Nombre.getText()) ) {
             error+="Falta ingresar Nombre\n";
         }
@@ -68,17 +90,18 @@ public class altaEstablecimiento extends javax.swing.JFrame {
             nombre=JTF_Nombre.getText();
             telefono=JTF_Telefono.getText();
             ubicacion=JTF_Ubicacion.getText();
-            productor=JCB_Productores.getItemAt(0);
+            productor=JCB_Productores.getSelectedItem().toString();
             
             datos+= "Nombre: " + nombre + "\nTeléfono: " + telefono + "\nUbicación: " + ubicacion + "\nProductor: " + productor;
             
             //Lo insertamos en la base de datos
-            /* COMPLETAR */
+            /* COMPLETAR */            
             
             // Mostramos el éxito de la operación
             JOptionPane.showMessageDialog(null, "Alta del nuevo establecimiento exitosa: \n\n" + datos);
             
             //Seteamos los valores de los JTextField para que sean nulos de nuevo
+            JTF_Codigo.setText("");
             JTF_Nombre.setText("");
             JTF_Telefono.setText("");
             JTF_Ubicacion.setText("");
@@ -113,6 +136,8 @@ public class altaEstablecimiento extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        JTF_Codigo = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -126,7 +151,6 @@ public class altaEstablecimiento extends javax.swing.JFrame {
 
         JL_NombreProductor.setText("Seleccione el Productor");
 
-        JCB_Productores.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Productor 1", "Productor 2", "Productor 3", "Productor 4" }));
         JCB_Productores.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 JCB_ProductoresActionPerformed(evt);
@@ -154,7 +178,9 @@ public class altaEstablecimiento extends javax.swing.JFrame {
             }
         });
 
-        jLabel5.setText("Ingresse los datos del nuevo Establecimiento:");
+        jLabel5.setText("Ingrese los datos del nuevo Establecimiento:");
+
+        jLabel1.setText("Código:");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -169,23 +195,25 @@ public class altaEstablecimiento extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(JL_NombreProductor)
-                                    .addComponent(jLabel4)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jLabel3))
-                                .addGap(56, 56, 56)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(JTF_Ubicacion, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(JTF_Telefono, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(JTF_Nombre, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(JCB_Productores, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jButton3)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
                                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(25, 25, 25)
-                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(JL_NombreProductor)
+                                    .addComponent(jLabel4)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jLabel3)
+                                    .addComponent(jLabel1))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(JTF_Ubicacion)
+                                    .addComponent(JTF_Telefono, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(JTF_Nombre, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(JTF_Codigo, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(JCB_Productores, 0, 320, Short.MAX_VALUE))))
                         .addGap(47, 47, 47))))
         );
         jPanel1Layout.setVerticalGroup(
@@ -193,7 +221,11 @@ public class altaEstablecimiento extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(22, 22, 22)
                 .addComponent(jLabel5)
-                .addGap(18, 18, 18)
+                .addGap(26, 26, 26)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(JTF_Codigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(9, 9, 9)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(JTF_Nombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -209,29 +241,29 @@ public class altaEstablecimiento extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(JL_NombreProductor)
                     .addComponent(JCB_Productores, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 55, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jButton2)
                     .addComponent(jButton3))
-                .addGap(35, 35, 35))
+                .addGap(25, 25, 25))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(20, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(23, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(22, 22, 22))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -306,12 +338,14 @@ public class altaEstablecimiento extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> JCB_Productores;
     private javax.swing.JLabel JL_NombreProductor;
+    private javax.swing.JTextField JTF_Codigo;
     private javax.swing.JTextField JTF_Nombre;
     private javax.swing.JTextField JTF_Telefono;
     private javax.swing.JTextField JTF_Ubicacion;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

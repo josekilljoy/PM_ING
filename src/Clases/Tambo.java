@@ -58,7 +58,6 @@ public class Tambo {
     private int idTambo;
     private String distribucion;
     private String nombre;
-    private ArrayList<Animal> animales;
     
     private static int NroTambo=0;
     
@@ -66,7 +65,6 @@ public class Tambo {
     public Tambo(String nombre, String distribucion) {
         this.nombre=nombre;
         this.distribucion=distribucion;
-        this.animales=new ArrayList<Animal>();
         
         idTambo=NroTambo;
         NroTambo++;
@@ -75,7 +73,6 @@ public class Tambo {
     public Tambo(String nombre, String distribucion, ArrayList<Animal> animales) {
         this.nombre=nombre;
         this.distribucion=distribucion;
-        this.animales=animales;
         
         idTambo=NroTambo;
         NroTambo++;
@@ -86,31 +83,15 @@ public class Tambo {
         this.idTambo=idTambo;
         this.nombre=nombre;
         this.distribucion=distribucion;
-        this.animales=animales;
     }
     
     //Constructor por defecto
     public Tambo() {
         this.nombre="";
         this.distribucion="";
-        this.animales=new ArrayList<Animal>();
         
         idTambo=NroTambo;
         NroTambo++;
-    }
-
-    /**
-     * @return the animales
-     */
-    public ArrayList<Animal> getAnimales() {
-        return animales;
-    }
-
-    /**
-     * @param animales the animales to set
-     */
-    public void setAnimales(ArrayList<Animal> animales) {
-        this.animales = animales;
     }
     
 }

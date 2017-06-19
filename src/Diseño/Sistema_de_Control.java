@@ -15,8 +15,7 @@ import javax.swing.JOptionPane;
  * @author COMPUTER
  */
 
-public class Sistema_de_Control extends javax.swing.JFrame {
-
+public class Sistema_de_Control extends javax.swing.JFrame {    
     /**
      * Creates new form Sistema_de_Control
      */

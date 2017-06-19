@@ -26,6 +26,9 @@ public class altaTambo extends javax.swing.JFrame {
         super.setLocationRelativeTo(null);
         
         //Textos de ayuda
+        TextPrompt placeholder = new TextPrompt("Código del Tambo", JTF_Codigo);
+        placeholder.changeAlpha(0.75f);
+        placeholder.changeStyle(Font.ITALIC);
         TextPrompt placeholder1 = new TextPrompt("Nombre del Tambo", JTF_Nombre);
         placeholder1.changeAlpha(0.75f);
         placeholder1.changeStyle(Font.ITALIC);
@@ -36,11 +39,14 @@ public class altaTambo extends javax.swing.JFrame {
 
     
     public String validarCampos() {
-        String error="";
+        String error="", codigo="";
         String nombre="";
         String distribucion="";
         String datos="";
         
+        if ( "".equals(JTF_Codigo.getText() )) {
+            error+="Falta ingresar Código\n";
+        }
         if ( "".equals(JTF_Nombre.getText() )) {
             error+="Falta ingresar Nombre\n";
         }
@@ -51,10 +57,11 @@ public class altaTambo extends javax.swing.JFrame {
         // Si no hubo errores
         if ( "".equals(error) ) {
             //Seleccionamos los datos ingresados
+            codigo=JTF_Codigo.getText();
             nombre=JTF_Nombre.getText();
             distribucion=JTF_Distribucion.getText();
             
-            datos+= "Nombre: " + nombre + "\nNombre: " + nombre + "\nDistribucion: " + distribucion;
+            datos+= "Código: " + codigo + "\nNombre: " + nombre + "\nDistribucion: " + distribucion;
             
             //Lo insertamos en la base de datos
             /* COMPLETAR */
@@ -63,6 +70,7 @@ public class altaTambo extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Alta del nuevo tambo exitosa: \n\n" + datos);
             
             //Seteamos los valores de los JTextField para que sean nulos de nuevo
+            JTF_Codigo.setText("");
             JTF_Nombre.setText("");
             JTF_Distribucion.setText("");            
         }
@@ -91,6 +99,8 @@ public class altaTambo extends javax.swing.JFrame {
         JTF_Distribucion = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        JTF_Codigo = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -129,50 +139,60 @@ public class altaTambo extends javax.swing.JFrame {
 
         jLabel3.setText("Distribución:");
 
+        jLabel4.setText("Código:");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(38, 38, 38)
+                .addGap(21, 21, 21)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(13, 13, 13)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel3))
-                        .addGap(59, 59, 59)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(JTF_Distribucion)
-                            .addComponent(JTF_Nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(JB_GuardarCargar)
-                        .addGap(61, 61, 61)
-                        .addComponent(JB_Guardar)
-                        .addGap(43, 43, 43)
-                        .addComponent(JB_Cancelar))
-                    .addComponent(jLabel1))
-                .addContainerGap(42, Short.MAX_VALUE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(JB_GuardarCargar)
+                                .addGap(73, 73, 73)
+                                .addComponent(JB_Guardar)
+                                .addGap(18, 18, 18)
+                                .addComponent(JB_Cancelar))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel4)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jLabel3))
+                                .addGap(46, 46, 46)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(JTF_Nombre)
+                                    .addComponent(JTF_Distribucion)
+                                    .addComponent(JTF_Codigo, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                .addContainerGap(32, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(44, 44, 44)
+                .addGap(20, 20, 20)
                 .addComponent(jLabel1)
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel2)
-                            .addComponent(JTF_Nombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(JTF_Distribucion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(21, 21, 21)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(JTF_Codigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(JTF_Nombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(JTF_Distribucion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
-                .addGap(48, 48, 48)
+                .addGap(31, 31, 31)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(JB_GuardarCargar)
                     .addComponent(JB_Guardar)
                     .addComponent(JB_Cancelar))
-                .addContainerGap(54, Short.MAX_VALUE))
+                .addContainerGap(26, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -262,11 +282,13 @@ public class altaTambo extends javax.swing.JFrame {
     private javax.swing.JButton JB_Cancelar;
     private javax.swing.JButton JB_Guardar;
     private javax.swing.JButton JB_GuardarCargar;
+    private javax.swing.JTextField JTF_Codigo;
     private javax.swing.JTextField JTF_Distribucion;
     private javax.swing.JTextField JTF_Nombre;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }
