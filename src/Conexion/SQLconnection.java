@@ -93,6 +93,13 @@ public class SQLconnection {
         return rs;
     }
     
+    // OBTENER TODOS LOS PRODUCCION
+    public ResultSet getProducccionResult() {
+        ResultSet rs=executeQuery("SELECT * FROM Produccion");
+        
+        return rs;
+    }
+    
     // ALTA PRODUCTOR
     public boolean insertProductor(Productor p) {
         String query = "INSERT INTO Productor VALUES ( '" + p.getNombre() + "','" + p.getTelefono() + "'," + p.getCodProductor() + " )";        
