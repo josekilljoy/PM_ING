@@ -709,6 +709,13 @@ public class Sistema_de_Control extends javax.swing.JFrame {
             ap.setLocationRelativeTo(null);
             ap.setVisible(true);
         }
+        
+        if (JRB_Prod_ListarProductores.isSelected()) {
+            Consultar_productores cp = new Consultar_productores();
+            cp.setTitle("Consultar productores");
+            cp.setLocationRelativeTo(null);
+            cp.setVisible(true);
+        }
     }//GEN-LAST:event_JB_Prod_AceptarActionPerformed
 
     /**
