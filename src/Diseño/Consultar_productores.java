@@ -5,6 +5,11 @@
  */
 
 package Diseño;
+import Conexion.SQLconnection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 /**
@@ -12,12 +17,19 @@ import javax.swing.table.DefaultTableModel;
  * @author josekilljoy95
  */
 public class Consultar_productores extends javax.swing.JFrame {
-
+    
+    DefaultTableModel modelo;
     /**
      * Creates new form Consultar_productores
      */
     public Consultar_productores() {
         initComponents();
+        modelo= new DefaultTableModel();
+        modelo.addColumn("Nombre");
+        modelo.addColumn("Teléfono");
+        modelo.addColumn("Código");
+        this.jTable1.setModel(modelo);
+        
     }
 
     /**
@@ -31,10 +43,30 @@ public class Consultar_productores extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         JB_M_P = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         JB_M_P.setText("Mostrar");
+        JB_M_P.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JB_M_PActionPerformed(evt);
+            }
+        });
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {},
+                {},
+                {},
+                {}
+            },
+            new String [] {
+
+            }
+        ));
+        jScrollPane1.setViewportView(jTable1);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -42,12 +74,18 @@ public class Consultar_productores extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(JB_M_P)
-                .addGap(0, 311, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 355, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(30, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(0, 255, Short.MAX_VALUE)
+                .addGap(59, 59, 59)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 116, Short.MAX_VALUE)
                 .addComponent(JB_M_P))
         );
 
@@ -71,6 +109,32 @@ public class Consultar_productores extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void JB_M_PActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JB_M_PActionPerformed
+        // TODO add your handling code here:
+        mostrar();
+    }//GEN-LAST:event_JB_M_PActionPerformed
+    public void mostrar(){
+        SQLconnection conn= new SQLconnection();
+        conn.connect();
+        ResultSet rs = conn.getProductoresResult();
+        String []Datos= new String [3];
+        int i;
+                try {
+            //JCB_Productores.addItem( "Seleccione Productor" );
+            while ( rs.next() ) {
+                //for (i=1; i<4;i++)
+                //{  
+                    Datos[0]=rs.getString(1);
+                    Datos[1]=rs.getString(2);
+                    Datos[2]=rs.getString(3);
+                //}
+                modelo.addRow(Datos);
+                //JCB_Productores.addItem( rs.getString(3) + " / " + rs.getString(1) );
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(altaEstablecimiento.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
     /**
      * @param args the command line arguments
      */
@@ -109,5 +173,7 @@ public class Consultar_productores extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton JB_M_P;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
 }
