@@ -686,6 +686,9 @@ public class Sistema_de_Control extends javax.swing.JFrame {
 
     private void JB_Produccion_CargarNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JB_Produccion_CargarNuevoActionPerformed
         // TODO add your handling code here:
+        cargarProducción c = new cargarProducción();
+        
+        c.setVisible(true);
     }//GEN-LAST:event_JB_Produccion_CargarNuevoActionPerformed
 
     private void JB_Estab_AceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JB_Estab_AceptarActionPerformed

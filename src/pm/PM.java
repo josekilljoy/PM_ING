@@ -59,6 +59,18 @@ public class PM {
         
         System.out.println(cadena);
         
+        String valor1="", valor2="";
+        conn.connect();
+        ResultSet rs2=conn.getEstablecimientosResult();
+        try {
+            while (rs2.next()) {
+                valor1=rs2.getString(1);
+                valor2=rs2.getString(2);
+                System.out.println(rs2.getString(1));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(PM.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
 }

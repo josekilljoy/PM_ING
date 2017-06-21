@@ -21,7 +21,7 @@ import java.util.logging.Logger;
 public class SQLconnection {
     private final String url = "jdbc:postgresql://localhost/PM_ING BD";
     private final String user = "postgres"; // Aquí el usuario de la BD
-    private final String password = "joselol123"; // Aquí el password de la BD
+    private final String password = "postgres"; // Aquí el password de la BD
     
     private Connection conn;
  
@@ -141,5 +141,68 @@ public class SQLconnection {
     public ResultSet getAnimales(String Cod_T) {
         ResultSet rs= executeQuery("SELECT Nbre_A,Etq_A FROM Animal WHERE cod_T = '"+Cod_T+"'");
         return rs;
+    }
+    
+    // ALTA ESTABLECIMIENTO
+    public boolean insertEstablecimiento(String nom, String tel, String ub, String cod_e, String cod_p) {
+        return updateQuery("INSERT INTO establecimiento VALUES ( '"+nom+"','"+tel+"','"+ub+"','"+cod_e+"','"+cod_p+"' )");
+    }
+    
+    // DEVUELVE EL CODIGO DE ESTABLECIMIENTO, A PARTIR DEL NOMBRE DE ESTABLECIMIENTO
+    public String getCodEstablecimiento(String nom) {
+        String query="SELECT cod_e FROM establecimiento WHERE nbr_e='"+nom+"'";
+        String cod="";
+        boolean salir=false;
+        
+        ResultSet rs=executeQuery(query);
+        
+        try {
+            while (rs.next()&&!salir) {
+                cod=rs.getString(1);
+                salir=true;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(SQLconnection.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return cod;
+    }
+    
+    // ALTA TAMBO
+    public boolean insertTambo(String distr, String nom, String codT, String codE) {
+        return updateQuery("INSERT INTO tambo VALUES ( '"+distr+"','"+nom+"','"+codT+"','"+codE+"')");
+    }
+    
+    // ALTA ANIMAL
+    public boolean insertAnimal(String nom, String raza, String etqa, String cod_t) {
+        return updateQuery("INSERT INTO animal VALUES ( '"+nom+"','"+raza+"','"+etqa+"','"+cod_t+"')");
+    }
+    
+    // OBTIENE EL RESULTSET DE LOS EMPLEADOS
+    public ResultSet getEmpleadosResult() {
+        ResultSet rs=executeQuery("SELECT * FROM Empleado");
+        
+        return rs;
+    }
+    
+    // INSERTA UNA PRODUCCION 
+    public boolean insertProduccion(String codT, String etqA, String fec, String prod, String idE) {
+        return updateQuery( "INSERT INTO control_lechero VALUES ( '"+codT+"','"+etqA+"','"+fec+"','"+prod+"','"+idE+"' )" );
+    }
+    
+    // VERIFICA SI EXISTE UNA PRODUCCION YA REGISTRADA
+    public boolean existeProduccion(String codT, String etqA) {
+        boolean exito=false;
+        ResultSet rs=executeQuery("SELECT cod_t, etq_a FROM control_lechero WHERE cod_t='"+codT+"' AND etq_a='"+etqA+"'");
+        
+        try {
+            while (rs.next()&&!exito) {
+                exito=true;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(SQLconnection.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return exito;
     }
 }

@@ -7,8 +7,8 @@ package ComboBox;
 
 import Clases.Tambo;
 import Conexion.SQLconnection;
-import Diseño.Productor;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 
@@ -17,20 +17,20 @@ import javax.swing.JComboBox;
  * @author josekilljoy95
  */
 public class TamboCB {
-     private SQLconnection conn= new SQLconnection();    
-    
+    private SQLconnection conn= new SQLconnection();
     
         public void listar_los_Tambos(JComboBox box, String cod_E){
-        DefaultComboBoxModel value;
-        int i;
-        ResultSet rs;
+            DefaultComboBoxModel value;
+            int i;
+            ResultSet rs;
         try{
             conn.connect();
             rs=conn.getTambosAsociados(cod_E);
             value = new DefaultComboBoxModel();
             box.setModel(value);
             
-            while(rs.next()){
+            box.addItem("Código Tambo");
+            while(rs.next()) {
                
               //value.addElement(rs.getString(1));//new Tambo(rs.getString(3),rs.getString(2),rs.getString(1),rs.getString(4))); 
               box.addItem(rs.getString(1));
