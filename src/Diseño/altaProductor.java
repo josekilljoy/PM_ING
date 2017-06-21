@@ -196,15 +196,13 @@ public class altaProductor extends javax.swing.JFrame {
             darAlta(p);
             
             /* MENSAJE DE ALTA EXITOSA */
-            JOptionPane.showMessageDialog(null, msj);
+            JOptionPane.showMessageDialog(null, msj+"\n");
             
             /* SETEAMOS LOS CAMPOS DE TEXTO*/
             JTF_Codigo.setText("");
             JTF_Nombre.setText("");
             JTF_Telefono.setText("");
-            
-            /* CERRAMOS LA CONEXION */
-            
+                        
         }
         else {
             JOptionPane.showMessageDialog(null, error);

@@ -12,10 +12,13 @@ import Conexion.SQLconnection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 
@@ -24,6 +27,8 @@ import javax.swing.table.DefaultTableModel;
  * @author COMPUTER
  */
 public class cargarProducción extends javax.swing.JFrame {
+    private ArrayList<String> listaCodEmpleados=new ArrayList<String>();    
+    SQLconnection conn = new SQLconnection();
     
     ProductorJCB pr= new ProductorJCB();
     EstablecimientoCB es= new EstablecimientoCB();
@@ -34,36 +39,101 @@ public class cargarProducción extends javax.swing.JFrame {
      */
     public cargarProducción() {
         initComponents();
+        conn.connect();
+        
+        // INICIALIZACION
+        super.setLocationRelativeTo(null);
+        super.setTitle("Cargar Producción");
+        JTF_Fecha.setText(getFechaPostgreSQL());
+        
         pr.listar_los_productores(JCB_Produ);
         
         modelo= new DefaultTableModel();
         modelo.addColumn("Animal");
         modelo.addColumn("Etiqueta");
         this.JT_Animal.setModel(modelo);
-
-    }
-        public void Mostrar(){
-        SQLconnection conn= new SQLconnection();
-        conn.connect();
-        String aux=(String)this.JCB_Tam.getSelectedItem();
-        ResultSet rs = conn.getAnimales(aux);
-        ArrayList lista = new ArrayList ();
-        int i;
-                try {
-
-            while ( rs.next() ) {
-
-                    lista.add(rs.getString(1));
-                    lista.add(rs.getString(2));
-                
-                modelo.addRow(lista.toArray());
-                
+        
+        JTF_Empleado.setEditable(false);
+        JTF_Etq.setEditable(false);
+        JTF_Fecha.setEditable(false);
+        
+        // INICIALIZACION DE COMBO BOX EMPLEADOS
+        ResultSet rs=conn.getEmpleadosResult();
+        try {
+            while (rs.next()) {
+                JCB_Empleados.addItem(rs.getString(1));
+                listaCodEmpleados.add(rs.getString(2)); // Guardamos los índices
             }
         } catch (SQLException ex) {
-            Logger.getLogger(altaEstablecimiento.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(cargarProducción.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+        resetearCampos();
+    }
+    
+    private void resetearCampos() {
+        
+        JCB_Empleados.setSelectedIndex(0);
+        JCB_Tam.setSelectedIndex(0);
+        JCB_Produ.setSelectedIndex(0);
+        JCB_Empleados.setSelectedIndex(0);
+        
+        JTF_Empleado.setText("");
+        JTF_Etq.setText("");
+        JTF_Etq.setText("");
+        JTF_Fecha.setText("");
+        
+        JT_Animal.removeAll();
+        
+        // COMBO BOX INHABILITADOS
+        JCB_Empleados.setEnabled(false);
+        JTF_Empleado.setEnabled(false);
+        JCB_Estable.setEnabled(false);
+        JCB_Tam.setEnabled(false);
+        
+        // JTEXTFIELD INHABILITADOS
+        JTF_Etq.setEnabled(false);
+        JTF_Fecha.setEnabled(false);
+        
+        JB_Mostrar.setEnabled(false);
+    }
+        public void Mostrar() {
+            SQLconnection conn= new SQLconnection();
+            conn.connect();
+            String aux=(String)this.JCB_Tam.getSelectedItem();
+            ResultSet rs = conn.getAnimales(aux);
+            ArrayList lista = new ArrayList ();
+            int i;
+            JT_Animal.setModel(modelo);
+            
+            try {
+                while ( rs.next() ) {
+
+                lista.add(rs.getString(1));
+                lista.add(rs.getString(2));
+
+                modelo.addRow(lista.toArray());
+
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(altaEstablecimiento.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+            
     }
 
+    public String getFechaPostgreSQL() {
+        String dia, mes, annio;
+        
+        Calendar c = new GregorianCalendar();
+        
+        dia = Integer.toString(c.get(Calendar.DATE));
+        mes = Integer.toString(c.get(Calendar.MONTH));
+        annio = Integer.toString(c.get(Calendar.YEAR));
+        
+        return ( annio + "-" + mes + "-" + dia );
+    }    
+        
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -89,9 +159,9 @@ public class cargarProducción extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         JSP_deTabla = new javax.swing.JScrollPane();
         JT_Animal = new javax.swing.JTable();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        JCB_Empleados = new javax.swing.JComboBox<>();
         JTF_Empleado = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        JB_Mostrar = new javax.swing.JButton();
 
         jToggleButton1.setText("jToggleButton1");
 
@@ -112,8 +182,18 @@ public class cargarProducción extends javax.swing.JFrame {
         });
 
         JB_Guardar_Produ.setText("Guardar");
+        JB_Guardar_Produ.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JB_Guardar_ProduActionPerformed(evt);
+            }
+        });
 
-        JB_Cancelar_Produ.setText("Cancelar");
+        JB_Cancelar_Produ.setText("Reset");
+        JB_Cancelar_Produ.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JB_Cancelar_ProduActionPerformed(evt);
+            }
+        });
 
         JCB_Produ.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Código Productor" }));
         JCB_Produ.addItemListener(new java.awt.event.ItemListener() {
@@ -130,6 +210,11 @@ public class cargarProducción extends javax.swing.JFrame {
         });
 
         JCB_Tam.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Código De Tambo" }));
+        JCB_Tam.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                JCB_TamItemStateChanged(evt);
+            }
+        });
         JCB_Tam.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 JCB_TamActionPerformed(evt);
@@ -149,14 +234,24 @@ public class cargarProducción extends javax.swing.JFrame {
 
             }
         ));
+        JT_Animal.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                JT_AnimalMouseClicked(evt);
+            }
+        });
         JSP_deTabla.setViewportView(JT_Animal);
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Código Empleado" }));
+        JCB_Empleados.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Código Empleado" }));
+        JCB_Empleados.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                JCB_EmpleadosItemStateChanged(evt);
+            }
+        });
 
-        jButton1.setText("Mostrar plantel");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        JB_Mostrar.setText("Mostrar plantel");
+        JB_Mostrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                JB_MostrarActionPerformed(evt);
             }
         });
 
@@ -166,46 +261,52 @@ public class cargarProducción extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(JSP_deTabla, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3)
-                            .addComponent(jButton1))
-                        .addGap(78, 78, 78)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(107, 107, 107)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel5)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
-                                        .addComponent(JTF_Fecha, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel2)
-                                        .addGap(35, 35, 35)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(JTF_Empleado)
-                                            .addComponent(JTF_Etq, javax.swing.GroupLayout.DEFAULT_SIZE, 80, Short.MAX_VALUE)))))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(115, 115, 115))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(JB_Guardar_Produ)
-                                    .addComponent(jLabel6))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(JTF_Cant_L, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(JB_Cancelar_Produ)))))
-                    .addComponent(TítuloFrameCP)
+                                    .addComponent(JB_Mostrar)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(10, 10, 10)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel3)
+                                            .addComponent(JSP_deTabla, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addGap(146, 146, 146)
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                    .addComponent(jLabel2)
+                                                    .addComponent(jLabel5))
+                                                .addGap(25, 25, 25))
+                                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                                .addGap(53, 53, 53)
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                    .addComponent(jLabel6)
+                                                    .addComponent(JCB_Empleados, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                .addGap(18, 18, 18)))
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                .addComponent(JTF_Empleado)
+                                                .addComponent(JTF_Etq, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addComponent(JTF_Fecha, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(JTF_Cant_L, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(127, 127, 127)
+                                        .addComponent(JB_Guardar_Produ, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(JB_Cancelar_Produ, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(TítuloFrameCP))
+                        .addGap(0, 16, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(JCB_Produ, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(28, 28, 28)
                         .addComponent(JCB_Estable, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(JCB_Tam, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap(57, Short.MAX_VALUE))
+                .addContainerGap(24, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -218,36 +319,35 @@ public class cargarProducción extends javax.swing.JFrame {
                     .addComponent(JCB_Estable, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(JCB_Tam, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(JSP_deTabla, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(35, 35, 35)
+                        .addGap(18, 18, 18)
+                        .addComponent(JB_Mostrar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel3)
+                        .addGap(18, 18, 18)
+                        .addComponent(JSP_deTabla, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(55, 55, 55)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(JCB_Empleados, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(JTF_Empleado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(JTF_Etq, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel2))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(JTF_Fecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel5))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(JTF_Cant_L, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(JTF_Cant_L, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(JB_Guardar_Produ)
-                            .addComponent(JB_Cancelar_Produ))
-                        .addGap(19, 19, 19))))
+                            .addComponent(JB_Cancelar_Produ)
+                            .addComponent(JB_Guardar_Produ))))
+                .addGap(31, 31, 31))
         );
 
         JCB_Produ.getAccessibleContext().setAccessibleName("");
@@ -266,20 +366,123 @@ public class cargarProducción extends javax.swing.JFrame {
 
     private void JCB_ProduItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_JCB_ProduItemStateChanged
         // TODO add your handling code here:
-        String p = (String)this.JCB_Produ.getSelectedItem();
-        es.listar_los_Establecimientos(JCB_Estable, p);
+        
+        // SI SELECCIONA UN PRODUCTOR VALIDO
+        if (JCB_Produ.getSelectedIndex()!=0) {
+            // SE HABILITA EL JCB DE ESTABLECIMIENTO
+            JCB_Estable.setEnabled(true);
+            
+            String p = (String)this.JCB_Produ.getSelectedItem();
+            es.listar_los_Establecimientos(JCB_Estable, p);
+        }
+        
     }//GEN-LAST:event_JCB_ProduItemStateChanged
 
     private void JCB_EstableItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_JCB_EstableItemStateChanged
         // TODO add your handling code here:
-        String e = (String)this.JCB_Estable.getSelectedItem();
-        ta.listar_los_Tambos(JCB_Tam, e);
+        
+        if (JCB_Estable.getSelectedIndex()!=0) {
+            // HABILITA LA SELECCION DEL TAMBO
+            JCB_Tam.setEnabled(true);
+            
+            String e = (String)this.JCB_Estable.getSelectedItem();
+            ta.listar_los_Tambos(JCB_Tam, e);
+        }
+        
+        
     }//GEN-LAST:event_JCB_EstableItemStateChanged
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void JB_Cancelar_ProduActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JB_Cancelar_ProduActionPerformed
         // TODO add your handling code here:
+        resetearCampos();
+    }//GEN-LAST:event_JB_Cancelar_ProduActionPerformed
+
+    private void JT_AnimalMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JT_AnimalMouseClicked
+        // TODO add your handling code here:
+        JCB_Empleados.setEnabled(true);        
+        JTF_Etq.setEnabled(true);
+        
+        String etiqueta="";
+ 
+        int row = JT_Animal.rowAtPoint(evt.getPoint());
+        if (row >= 0 && JT_Animal.isEnabled())
+        {
+            etiqueta=JT_Animal.getValueAt(row, 1).toString();            
+        }
+ 
+        JTF_Etq.setText(etiqueta);
+    }//GEN-LAST:event_JT_AnimalMouseClicked
+
+    private void JCB_EmpleadosItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_JCB_EmpleadosItemStateChanged
+        // TODO add your handling code here:        
+        JTF_Empleado.setEnabled(true);
+        JTF_Fecha.setEnabled(true);
+        
+        if (JCB_Empleados.getSelectedIndex()!=0) {
+            JTF_Empleado.setText( listaCodEmpleados.get( JCB_Empleados.getSelectedIndex()-1 ) );
+        }
+        else {
+            JTF_Empleado.setText( "" );
+        }
+        
+    }//GEN-LAST:event_JCB_EmpleadosItemStateChanged
+
+    private void JCB_TamItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_JCB_TamItemStateChanged
+        // TODO add your handling code here:
+        if (JCB_Tam.getSelectedIndex()!=0) {
+            JB_Mostrar.setEnabled(true);
+        }
+    }//GEN-LAST:event_JCB_TamItemStateChanged
+
+    private void JB_Guardar_ProduActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JB_Guardar_ProduActionPerformed
+        // TODO add your handling code here:
+        
+        // SE OBTIENE EL CODIGO DEL TAMBO
+        if (JCB_Tam.getSelectedIndex()!=0) {
+            if (!JTF_Cant_L.getText().equals("")) {
+                // GUARDAR LA PRODUCCION
+                String codT=JCB_Tam.getSelectedItem().toString();
+                String etqA=JTF_Etq.getText();
+                String fec=JTF_Fecha.getText();
+                String prod=JTF_Cant_L.getText();
+                String idE=JTF_Empleado.getText();
+                
+                boolean exito=false;
+                boolean existeRepetido=conn.existeProduccion(codT, etqA);
+                String aviso="";
+                
+                if (!existeRepetido) {
+                    exito=conn.insertProduccion(codT, etqA, fec, prod, idE);
+                }
+                else {
+                    aviso+="Cod. Tambo: " + codT + "\n";
+                    aviso+="Etq. Animal: " + etqA + "\n";
+                    JOptionPane.showMessageDialog(null, "Ya existe un registro para ese tambo y esa vaca: \n\n" + aviso + "\n" );
+                }
+                
+                // ALTA EXITOSA
+                if (exito) {
+                    String msj="Código: " + codT +  "\n";
+                    msj+="Etiqueta: " + etqA +  "\n";
+                    msj+="Fecha: " + fec +  "\n";
+                    msj+="Cant. Leche: " + prod +  "\n";
+                    msj+="Id. Empleado: " + idE +  "\n";
+                    
+                    JOptionPane.showMessageDialog(null, "Alta exitosa:\n\n" + msj+"\n");
+                }
+            }
+            else {
+                JOptionPane.showMessageDialog(null, "La cantidad de producción ingresada es incorrecta");
+            }
+        }
+        
+    }//GEN-LAST:event_JB_Guardar_ProduActionPerformed
+
+    private void JB_MostrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JB_MostrarActionPerformed
+        // TODO add your handling code here:
+        JB_Mostrar.setEnabled(false);
         Mostrar();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_JB_MostrarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -319,6 +522,8 @@ public class cargarProducción extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton JB_Cancelar_Produ;
     private javax.swing.JButton JB_Guardar_Produ;
+    private javax.swing.JButton JB_Mostrar;
+    private javax.swing.JComboBox<String> JCB_Empleados;
     private javax.swing.JComboBox<String> JCB_Estable;
     private javax.swing.JComboBox<String> JCB_Produ;
     private javax.swing.JComboBox<String> JCB_Tam;
@@ -329,12 +534,14 @@ public class cargarProducción extends javax.swing.JFrame {
     private javax.swing.JTextField JTF_Fecha;
     private javax.swing.JTable JT_Animal;
     private javax.swing.JLabel TítuloFrameCP;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JToggleButton jToggleButton1;
     // End of variables declaration//GEN-END:variables
+
+    private Object JOptionPane() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

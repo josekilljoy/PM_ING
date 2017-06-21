@@ -6,7 +6,6 @@
 package ComboBox;
 
 import Conexion.SQLconnection;
-import Diseño.Productor;
 import java.sql.ResultSet;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
@@ -29,7 +28,7 @@ public class ProductorJCB {
            
             value = new DefaultComboBoxModel();
             box.setModel(value);
-            
+            box.addItem("Código Productor");
             while(rs.next()){
                
              

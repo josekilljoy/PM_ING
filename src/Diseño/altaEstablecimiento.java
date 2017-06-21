@@ -5,10 +5,12 @@
  */
 package Diseño;
 
+import Clases.Establecimiento;
 import Conexion.SQLconnection;
 import java.awt.Font;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -18,34 +20,31 @@ import javax.swing.JOptionPane;
  * @author COMPUTER
  */
 public class altaEstablecimiento extends javax.swing.JFrame {
+    
+    private final SQLconnection conn=new SQLconnection();
+    private ArrayList<String> listacodProdSelecconado=new ArrayList<String>();
+    
     /**
      * Creates new form altaEstablecimiento
      */
     public altaEstablecimiento() {
-        initComponents();
-        
-        /* Seleccionamos los productores de toda la BD */
-        SQLconnection conn= new SQLconnection();
+        initComponents();        
         conn.connect();
-        ResultSet rs = conn.getProductoresResult();
         
-        try {
-            JCB_Productores.addItem( "Seleccione Productor" );
-            while ( rs.next() ) {
-                JCB_Productores.addItem( rs.getString(3) + " / " + rs.getString(1) );
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(altaEstablecimiento.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
+        //Ubicar la ventana al centro de la pantalla
+        super.setLocationRelativeTo(null);        
         super.setTitle("Alta de nuevo establecimiento");
         
-        //Centramos a la ventana
-        super.setLocationRelativeTo(null);
+        //Cargar productores en el jComboBox
+        cargarProductores();
         
         //Que haga focus en este campo al iniciar la ventana
         JTF_Codigo.requestFocus();
         
+        habilitarPlaceholder();
+    }
+    
+    private void habilitarPlaceholder() {
         //Texto de ayuda para rellenar los campos
         TextPrompt placeholder = new TextPrompt("Código del Establecimiento", JTF_Codigo);
         placeholder.changeAlpha(0.75f);
@@ -59,17 +58,25 @@ public class altaEstablecimiento extends javax.swing.JFrame {
         TextPrompt placeholder3 = new TextPrompt("Ubicación del Establecimiento", JTF_Ubicacion);
         placeholder3.changeAlpha(0.75f);
         placeholder3.changeStyle(Font.ITALIC);
+    }
+
+    private void cargarProductores() {
+        /* Seleccionamos los productores de toda la BD */
+        ResultSet rs = conn.getProductoresResult();
         
+        try {
+            JCB_Productores.addItem( "Seleccione Productor" );
+            while ( rs.next() ) {
+                JCB_Productores.addItem(rs.getString(3) + " - " + rs.getString(1) );
+                listacodProdSelecconado.add(rs.getString(3));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(altaEstablecimiento.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     public String validarCampos() {
-        String error="", datos="";
-        
-        String codigo="";
-        String nombre="";
-        String telefono="";
-        String ubicacion="";
-        String productor="";
+        String error=""; 
         
         //Validamos los campos
         if ( "".equals(JTF_Codigo.getText()) ) {
@@ -84,37 +91,40 @@ public class altaEstablecimiento extends javax.swing.JFrame {
         if ( "".equals(JTF_Ubicacion.getText()) ) {
             error+="Falta ingresar Ubicación\n";
         }
-        
-        //Si no hay errores
-        if ( "".equals(error) ) {
-            //Seleccionamos los datos ingresados
-            nombre=JTF_Nombre.getText();
-            telefono=JTF_Telefono.getText();
-            ubicacion=JTF_Ubicacion.getText();
-            productor=JCB_Productores.getSelectedItem().toString();
-            
-            datos+= "Nombre: " + nombre + "\nTeléfono: " + telefono + "\nUbicación: " + ubicacion + "\nProductor: " + productor;
-            
-            //Lo insertamos en la base de datos
-            /* COMPLETAR */            
-            
-            // Mostramos el éxito de la operación
-            JOptionPane.showMessageDialog(null, "Alta del nuevo establecimiento exitosa: \n\n" + datos);
-            
-            //Seteamos los valores de los JTextField para que sean nulos de nuevo
-            JTF_Codigo.setText("");
-            JTF_Nombre.setText("");
-            JTF_Telefono.setText("");
-            JTF_Ubicacion.setText("");
-        }
-        else {
-            //Mostramos mensaje de error de los campos
-            JOptionPane.showMessageDialog(null, error, "Error ingreso datos", HEIGHT);
-        }
-        
+                
         return error;
     }
 
+    public void altaEstablecimiento() {
+        
+        String codigo=JTF_Codigo.getText();
+        String nombre=JTF_Nombre.getText();
+        String telefono=JTF_Telefono.getText();
+        String ubicacion=JTF_Ubicacion.getText();
+        String productor=JCB_Productores.getSelectedItem().toString();
+
+        /* ALTA BASE DE DATOS */
+        String cod_p=listacodProdSelecconado.get( JCB_Productores.getSelectedIndex() );        
+        boolean exito=conn.insertEstablecimiento(nombre, telefono, ubicacion, codigo, cod_p);
+        
+        if (exito) {
+            String datos= "Código: "+codigo+"\nNombre: " + nombre + "\nTeléfono: " + telefono + "\nUbicación: " + ubicacion + "\nProductor: " + productor;
+            
+            // Mostramos el éxito de la operación
+            JOptionPane.showMessageDialog(null, "Alta del nuevo establecimiento exitosa: \n\n" + datos +"\n" );
+
+        }
+    }
+    
+    public void resetearCampos() {
+        //Seteamos los valores de los JTextField para que sean nulos de nuevo
+        JTF_Codigo.setText("");
+        JTF_Nombre.setText("");
+        JTF_Telefono.setText("");
+        JTF_Ubicacion.setText("");
+        JCB_Productores.setSelectedIndex(0);
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -279,11 +289,22 @@ public class altaEstablecimiento extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    public void guardar() {
+        String error=validarCampos();        
+        if ("".equals(error)) {
+            altaEstablecimiento();
+        }
+        else {
+            JOptionPane.showMessageDialog(null, error, "Error ingreso datos", HEIGHT);
+        }
+    }
+    
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        validarCampos();        
+        guardar();
+        resetearCampos();
     }//GEN-LAST:event_jButton1ActionPerformed
-
+    
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
         
@@ -293,10 +314,18 @@ public class altaEstablecimiento extends javax.swing.JFrame {
         
         //Si no hubo errores
         if ("".equals(error)) {
+            altaEstablecimiento();
+            
             altaTambo alTambo = new altaTambo();
             alTambo.setTitle("Alta de nuevo Tambo");
+            alTambo.setCod_e(error);
             alTambo.setVisible(true);
+            
+            resetearCampos();
             this.dispose();
+        }
+        else {
+            JOptionPane.showMessageDialog(null, error, "Error ingreso datos", HEIGHT);
         }
         
     }//GEN-LAST:event_jButton3ActionPerformed
@@ -353,4 +382,5 @@ public class altaEstablecimiento extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
+
 }

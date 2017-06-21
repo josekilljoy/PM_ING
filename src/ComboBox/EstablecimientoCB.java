@@ -7,7 +7,6 @@ package ComboBox;
 
 import Clases.Establecimiento;
 import Conexion.SQLconnection;
-import Diseño.Productor;
 import java.sql.ResultSet;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
@@ -31,6 +30,7 @@ public class EstablecimientoCB {
             value = new DefaultComboBoxModel();
             box.setModel(value);
             
+            box.addItem("Código establecimiento");
             while(rs.next()){
                
               //value.addElement(rs.getString(4));//new Establecimiento(rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(5),rs.getString(4)));  

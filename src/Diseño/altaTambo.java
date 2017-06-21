@@ -5,6 +5,7 @@
  */
 package Diseño;
 
+import Conexion.SQLconnection;
 import java.awt.Font;
 import javax.swing.JOptionPane;
 
@@ -14,12 +15,15 @@ import javax.swing.JOptionPane;
  */
 public class altaTambo extends javax.swing.JFrame {
 
+    private SQLconnection conn=new SQLconnection();
+    private String cod_e;
+    
     /**
      * Creates new form altaTambo
      */
     public altaTambo() {
         initComponents();
-        
+        conn.connect();
         super.setTitle("Alta de Tambo");
         
         //Modificamos la localización
@@ -39,10 +43,7 @@ public class altaTambo extends javax.swing.JFrame {
 
     
     public String validarCampos() {
-        String error="", codigo="";
-        String nombre="";
-        String distribucion="";
-        String datos="";
+        String error="";
         
         if ( "".equals(JTF_Codigo.getText() )) {
             error+="Falta ingresar Código\n";
@@ -54,31 +55,14 @@ public class altaTambo extends javax.swing.JFrame {
             error+="Falta ingresar Distribucion\n";
         }
         
-        // Si no hubo errores
-        if ( "".equals(error) ) {
-            //Seleccionamos los datos ingresados
-            codigo=JTF_Codigo.getText();
-            nombre=JTF_Nombre.getText();
-            distribucion=JTF_Distribucion.getText();
-            
-            datos+= "Código: " + codigo + "\nNombre: " + nombre + "\nDistribucion: " + distribucion;
-            
-            //Lo insertamos en la base de datos
-            /* COMPLETAR */
-            
-            // Mostramos el éxito de la operación
-            JOptionPane.showMessageDialog(null, "Alta del nuevo tambo exitosa: \n\n" + datos);
-            
-            //Seteamos los valores de los JTextField para que sean nulos de nuevo
-            JTF_Codigo.setText("");
-            JTF_Nombre.setText("");
-            JTF_Distribucion.setText("");            
-        }
-        else {
-            JOptionPane.showMessageDialog(null, error);
-        }
-        
         return error;
+    }
+
+    public void resetearCampos() {
+        //Seteamos los valores de los JTextField para que sean nulos de nuevo
+        JTF_Codigo.setText("");
+        JTF_Nombre.setText("");
+        JTF_Distribucion.setText("");            
     }
     
     /**
@@ -115,7 +99,7 @@ public class altaTambo extends javax.swing.JFrame {
 
         jLabel1.setText("Ingrese los datos del tambo:");
 
-        JB_Cancelar.setText("Cancelar");
+        JB_Cancelar.setText("Atrás");
         JB_Cancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 JB_CancelarActionPerformed(evt);
@@ -151,13 +135,13 @@ public class altaTambo extends javax.swing.JFrame {
                     .addComponent(jLabel1)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(13, 13, 13)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(JB_GuardarCargar)
                                 .addGap(73, 73, 73)
                                 .addComponent(JB_Guardar)
                                 .addGap(18, 18, 18)
-                                .addComponent(JB_Cancelar))
+                                .addComponent(JB_Cancelar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel4)
@@ -225,6 +209,8 @@ public class altaTambo extends javax.swing.JFrame {
         String errores=validarCampos();
         
         if ("".equals(errores)) {
+            altaTambo();
+            
             altaAnimal altaAnim = new altaAnimal();
             altaAnim.setTitle("Alta de nuevo Animal");
             this.dispose();
@@ -235,12 +221,40 @@ public class altaTambo extends javax.swing.JFrame {
 
     private void JB_CancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JB_CancelarActionPerformed
         // TODO add your handling code here:
+        altaEstablecimiento e = new altaEstablecimiento();
+        e.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_JB_CancelarActionPerformed
 
+    public void altaTambo() {
+        String codigo=JTF_Codigo.getText();
+        String nombre=JTF_Nombre.getText();
+        String distribucion=JTF_Distribucion.getText();
+
+        //Lo insertamos en la base de datos
+        boolean exito=conn.insertTambo(distribucion, nombre, codigo, cod_e);
+
+        if (exito) {
+            // Mostramos el éxito de la operación            
+            String datos= "Código: " + codigo + "\nNombre: " + nombre + "\nDistribucion: " + distribucion;
+            JOptionPane.showMessageDialog(null, "Alta del nuevo tambo exitosa: \n\n" + datos);
+        }
+            
+    }
+    
     private void JB_GuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JB_GuardarActionPerformed
         // TODO add your handling code here:
-        validarCampos();
+        String error=validarCampos();
+        
+        // Si no hubo errores
+        if ( "".equals(error) ) {
+            altaTambo();
+            resetearCampos();
+        }
+        else {
+            JOptionPane.showMessageDialog(null, error);
+        }
+        
     }//GEN-LAST:event_JB_GuardarActionPerformed
 
     /**
@@ -291,4 +305,19 @@ public class altaTambo extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
+
+
+    /**
+     * @return the cod_e
+     */
+    public String getCod_e() {
+        return cod_e;
+    }
+
+    /**
+     * @param cod_e the cod_e to set
+     */
+    public void setCod_e(String cod_e) {
+        this.cod_e = cod_e;
+    }
 }
