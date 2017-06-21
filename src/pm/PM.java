@@ -34,43 +34,6 @@ public class PM {
         Sistema_de_Control s = new Sistema_de_Control();
         s.setTitle("Sistema de Control Lechero");
         s.setVisible(true);
-        
-        Establecimiento es = new Establecimiento();
-       // es.getIdEstablecimiento();
-        
-        Establecimiento es2 = new Establecimiento();
-        //es2.getIdEstablecimiento();
-        
-        Establecimiento es3 = new Establecimiento();
-        //es3.getIdEstablecimiento();
-        
-        SQLconnection conn = new SQLconnection();
-        conn.connect();
-        
-        ResultSet rs=conn.getProductoresResult();
-        String cadena="";
-        try {
-            while (rs.next()) {
-                cadena += rs.getString (1) + ", " + rs.getString(2) + ", " + rs.getString(3)+"\n";                
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(PM.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-        System.out.println(cadena);
-        
-        String valor1="", valor2="";
-        conn.connect();
-        ResultSet rs2=conn.getEstablecimientosResult();
-        try {
-            while (rs2.next()) {
-                valor1=rs2.getString(1);
-                valor2=rs2.getString(2);
-                System.out.println(rs2.getString(1));
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(PM.class.getName()).log(Level.SEVERE, null, ex);
-        }
+       
     }
-    
 }
