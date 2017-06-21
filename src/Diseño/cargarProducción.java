@@ -48,11 +48,6 @@ public class cargarProducción extends javax.swing.JFrame {
         
         pr.listar_los_productores(JCB_Produ);
         
-        modelo= new DefaultTableModel();
-        modelo.addColumn("Animal");
-        modelo.addColumn("Etiqueta");
-        this.JT_Animal.setModel(modelo);
-        
         JTF_Empleado.setEditable(false);
         JTF_Etq.setEditable(false);
         JTF_Fecha.setEditable(false);
@@ -83,7 +78,10 @@ public class cargarProducción extends javax.swing.JFrame {
         JTF_Etq.setText("");
         JTF_Fecha.setText("");
         
-        JT_Animal.removeAll();
+        modelo= new DefaultTableModel();
+        modelo.addColumn("Animal");
+        modelo.addColumn("Etiqueta");
+        this.JT_Animal.setModel(modelo);
         
         // COMBO BOX INHABILITADOS
         JCB_Empleados.setEnabled(false);
