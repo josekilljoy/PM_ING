@@ -77,6 +77,7 @@ public class cargarProducción extends javax.swing.JFrame {
         JTF_Etq.setText("");
         JTF_Etq.setText("");
         JTF_Fecha.setText("");
+        JTF_Fecha.setText(getFechaPostgreSQL());
         
         modelo= new DefaultTableModel();
         modelo.addColumn("Animal");
@@ -415,6 +416,7 @@ public class cargarProducción extends javax.swing.JFrame {
         // TODO add your handling code here:        
         JTF_Empleado.setEnabled(true);
         JTF_Fecha.setEnabled(true);
+        JTF_Fecha.setText(getFechaPostgreSQL());
         
         if (JCB_Empleados.getSelectedIndex()!=0) {
             JTF_Empleado.setText( listaCodEmpleados.get( JCB_Empleados.getSelectedIndex()-1 ) );
