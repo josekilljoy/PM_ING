@@ -26,20 +26,6 @@ public class Sistema_de_Control extends javax.swing.JFrame {
         
         //Centramos la ubicación de la ventana con respecto a la pantalla        
         setLocationRelativeTo(null);
-        
-        // Seteamos el texto de ayuda por defecto para los jTextField Producción
-        TextPrompt placeholder1 = new TextPrompt("Nombre del Productor", JTF_Productor);
-        placeholder1.changeAlpha(0.75f);
-        placeholder1.changeStyle(Font.ITALIC);
-        TextPrompt placeholder2 = new TextPrompt("Nombre del Establecimiento", JTF_Establecimiento);
-        placeholder2.changeAlpha(0.75f);
-        placeholder2.changeStyle(Font.ITALIC);
-        TextPrompt placeholder3 = new TextPrompt("Nombre del Tambo", JTF_Tambo);
-        placeholder3.changeAlpha(0.75f);
-        placeholder3.changeStyle(Font.ITALIC);
-        TextPrompt placeholder4 = new TextPrompt("Nombre del Animal", JTF_Animal);
-        placeholder4.changeAlpha(0.75f);
-        placeholder4.changeStyle(Font.ITALIC);
 
     }
     /**
@@ -99,7 +85,7 @@ public class Sistema_de_Control extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        jRadioButton20 = new javax.swing.JRadioButton();
+        JRB_AGREGARANIMAL = new javax.swing.JRadioButton();
         jRadioButton21 = new javax.swing.JRadioButton();
         jRadioButton22 = new javax.swing.JRadioButton();
         jRadioButton23 = new javax.swing.JRadioButton();
@@ -108,25 +94,8 @@ public class Sistema_de_Control extends javax.swing.JFrame {
         jPanel4 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
         JB_Produccion_CargarNuevo = new javax.swing.JButton();
-        jPanel5 = new javax.swing.JPanel();
-        jLabel10 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
-        jLabel13 = new javax.swing.JLabel();
-        jLabel14 = new javax.swing.JLabel();
-        JTF_Animal = new javax.swing.JTextField();
-        JTF_Tambo = new javax.swing.JTextField();
-        JTF_Establecimiento = new javax.swing.JTextField();
-        JTF_Productor = new javax.swing.JTextField();
-        jButton10 = new javax.swing.JButton();
-        jButton11 = new javax.swing.JButton();
-        jButton12 = new javax.swing.JButton();
-        jButton13 = new javax.swing.JButton();
-        jTextField8 = new javax.swing.JTextField();
-        jTextField7 = new javax.swing.JTextField();
-        jTextField6 = new javax.swing.JTextField();
-        jTextField5 = new javax.swing.JTextField();
-        jLabel15 = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu2 = new javax.swing.JMenu();
 
@@ -430,8 +399,8 @@ public class Sistema_de_Control extends javax.swing.JFrame {
 
         jLabel8.setText("Seleccione una opcion a consultar:");
 
-        grupo_acc_animal.add(jRadioButton20);
-        jRadioButton20.setText("Agregar nuevo animal.");
+        grupo_acc_animal.add(JRB_AGREGARANIMAL);
+        JRB_AGREGARANIMAL.setText("Agregar nuevo animal.");
 
         grupo_acc_animal.add(jRadioButton21);
         jRadioButton21.setText("Modificar datos animal.");
@@ -446,6 +415,11 @@ public class Sistema_de_Control extends javax.swing.JFrame {
         jRadioButton24.setText("Obtener etiqueta.");
 
         JB_Animal_Aceptar.setText("Aceptar");
+        JB_Animal_Aceptar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JB_Animal_AceptarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -458,7 +432,7 @@ public class Sistema_de_Control extends javax.swing.JFrame {
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(11, 11, 11)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jRadioButton20)
+                            .addComponent(JRB_AGREGARANIMAL)
                             .addComponent(jRadioButton21)
                             .addComponent(jRadioButton22))))
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -488,7 +462,7 @@ public class Sistema_de_Control extends javax.swing.JFrame {
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel7)
                         .addGap(18, 18, 18)
-                        .addComponent(jRadioButton20)
+                        .addComponent(JRB_AGREGARANIMAL)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jRadioButton21)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -500,7 +474,7 @@ public class Sistema_de_Control extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Animal", jPanel3);
 
-        jLabel9.setText("Para cargar la producción ");
+        jLabel9.setText("Para cargar la producción: ");
 
         JB_Produccion_CargarNuevo.setText("Cargar nuevo");
         JB_Produccion_CargarNuevo.addActionListener(new java.awt.event.ActionListener() {
@@ -509,107 +483,14 @@ public class Sistema_de_Control extends javax.swing.JFrame {
             }
         });
 
-        jPanel5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
-        jPanel5.setToolTipText("");
-        jPanel5.setName(""); // NOI18N
+        jLabel16.setText("Para consultar la  produción:");
 
-        jLabel10.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel10.setText("Consultar Producción:");
-
-        jLabel11.setText("Productor:");
-
-        jLabel12.setText("Establecimiento:");
-
-        jLabel13.setText("Tambo:");
-
-        jLabel14.setText("Animal:");
-
-        jButton10.setText("Calcular");
-
-        jButton11.setText("Calcular");
-
-        jButton12.setText("Calcular");
-
-        jButton13.setText("Calcular");
-
-        jLabel15.setText("Cantidad en Litros:");
-
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel12)
-                    .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLabel14)
-                        .addComponent(jLabel13))
-                    .addComponent(jLabel11))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(JTF_Tambo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 204, Short.MAX_VALUE)
-                    .addComponent(JTF_Establecimiento, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(JTF_Productor, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(JTF_Animal))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel15, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jButton10)
-                            .addComponent(jButton12, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton11, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton13, javax.swing.GroupLayout.Alignment.LEADING))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTextField8)
-                            .addComponent(jTextField7)
-                            .addComponent(jTextField6)
-                            .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(35, 35, 35))
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGap(22, 22, 22)
-                .addComponent(jLabel10)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel15)
-                .addGap(18, 18, 18)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton10)
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel11)
-                            .addComponent(JTF_Productor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel12)
-                            .addComponent(JTF_Establecimiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton11))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel13)
-                            .addComponent(JTF_Tambo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton12)
-                            .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel14)
-                            .addComponent(JTF_Animal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton13)
-                            .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(34, Short.MAX_VALUE))
-        );
+        jButton1.setText("Consultar Producción");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -620,24 +501,25 @@ public class Sistema_de_Control extends javax.swing.JFrame {
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(JB_Produccion_CargarNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel9))
-                .addGap(43, 43, 43)
-                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(73, Short.MAX_VALUE))
+                .addGap(190, 190, 190)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel16, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(326, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(43, 43, 43)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(jLabel9)
-                        .addGap(36, 36, 36)
-                        .addComponent(JB_Produccion_CargarNuevo)))
-                .addGap(56, 56, 56))
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel9)
+                    .addComponent(jLabel16))
+                .addGap(36, 36, 36)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(JB_Produccion_CargarNuevo)
+                    .addComponent(jButton1))
+                .addGap(242, 242, 242))
         );
-
-        jPanel5.getAccessibleContext().setAccessibleName("");
 
         jTabbedPane1.addTab("Producción", jPanel4);
 
@@ -721,6 +603,24 @@ public class Sistema_de_Control extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_JB_Prod_AceptarActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        consultarProducción c = new consultarProducción();
+        c.setTitle("Consultar producción");
+        c.setLocationRelativeTo(null);
+        c.setVisible(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void JB_Animal_AceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JB_Animal_AceptarActionPerformed
+        // TODO add your handling code here:
+        if (JRB_AGREGARANIMAL.isSelected()) {
+            altaAnimal a = new altaAnimal();
+            a.setTitle("Alta de nuevo Animal");
+            a.setLocationRelativeTo(null);
+            a.setVisible(true);
+        }
+    }//GEN-LAST:event_JB_Animal_AceptarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -762,15 +662,12 @@ public class Sistema_de_Control extends javax.swing.JFrame {
     private javax.swing.JButton JB_Prod_Aceptar;
     private javax.swing.JButton JB_Produccion_CargarNuevo;
     private javax.swing.JButton JB_Tambo_Aceptar;
+    private javax.swing.JRadioButton JRB_AGREGARANIMAL;
     private javax.swing.JRadioButton JRB_AgregarEstablecimiento;
     private javax.swing.JRadioButton JRB_Estab_ACargo;
     private javax.swing.JRadioButton JRB_Prod_ListarProductores;
     private javax.swing.JRadioButton JRB_Prod_Pertenencia;
     private javax.swing.JRadioButton JRB_Prod_Telefono;
-    private javax.swing.JTextField JTF_Animal;
-    private javax.swing.JTextField JTF_Establecimiento;
-    private javax.swing.JTextField JTF_Productor;
-    private javax.swing.JTextField JTF_Tambo;
     private javax.swing.JRadioButton buttaltaprodu;
     private javax.swing.JRadioButton buttelimprodu;
     private javax.swing.JRadioButton buttmodprodu;
@@ -782,17 +679,9 @@ public class Sistema_de_Control extends javax.swing.JFrame {
     private javax.swing.ButtonGroup grupoaccproductor;
     private javax.swing.ButtonGroup grupoconsuestable;
     private javax.swing.ButtonGroup grupoconsuprodu;
-    private javax.swing.JButton jButton10;
-    private javax.swing.JButton jButton11;
-    private javax.swing.JButton jButton12;
-    private javax.swing.JButton jButton13;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -808,7 +697,6 @@ public class Sistema_de_Control extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JRadioButton jRadioButton10;
     private javax.swing.JRadioButton jRadioButton11;
@@ -819,7 +707,6 @@ public class Sistema_de_Control extends javax.swing.JFrame {
     private javax.swing.JRadioButton jRadioButton16;
     private javax.swing.JRadioButton jRadioButton17;
     private javax.swing.JRadioButton jRadioButton18;
-    private javax.swing.JRadioButton jRadioButton20;
     private javax.swing.JRadioButton jRadioButton21;
     private javax.swing.JRadioButton jRadioButton22;
     private javax.swing.JRadioButton jRadioButton23;
@@ -831,9 +718,5 @@ public class Sistema_de_Control extends javax.swing.JFrame {
     private javax.swing.JRadioButton jRadioButton9;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField7;
-    private javax.swing.JTextField jTextField8;
     // End of variables declaration//GEN-END:variables
 }

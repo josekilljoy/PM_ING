@@ -138,6 +138,11 @@ public class consultarProducción extends javax.swing.JFrame {
         });
 
         jButton2.setText("Salir");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -148,7 +153,7 @@ public class consultarProducción extends javax.swing.JFrame {
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGap(18, 18, 18)
                             .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addComponent(jLabel1)
@@ -201,6 +206,7 @@ public class consultarProducción extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         Mostrar();
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void JCB_ProductorItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_JCB_ProductorItemStateChanged
@@ -211,7 +217,7 @@ public class consultarProducción extends javax.swing.JFrame {
     }//GEN-LAST:event_JCB_ProductorItemStateChanged
 
     private void JCB_TamboItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_JCB_TamboItemStateChanged
-        // TODO add your handling code here:
+        // TODO add your handling code here:        
 
     }//GEN-LAST:event_JCB_TamboItemStateChanged
 
@@ -221,6 +227,11 @@ public class consultarProducción extends javax.swing.JFrame {
         
         ta.listar_los_Tambos(JCB_Tambo, e);
     }//GEN-LAST:event_JCB_EstablecimientoItemStateChanged
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments

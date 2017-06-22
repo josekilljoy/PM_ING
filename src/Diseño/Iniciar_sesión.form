@@ -84,11 +84,17 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Iniciar Sesi&#xf3;n Como Empleado"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botoniniciarempleadoActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="botoniniciargerente">
           <Properties>
             <Property name="text" type="java.lang.String" value="Iniciar Sesi&#xf3;n Como Gerente"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botoniniciargerenteActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JSeparator" name="jSeparator1">
         </Component>

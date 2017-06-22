@@ -5,14 +5,7 @@
  */
 package pm;
 
-import Clases.Establecimiento;
-import Clases.Productor;
-import Conexion.SQLconnection;
-import Diseño.Sistema_de_Control;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import Diseño.Iniciar_sesión;
 
 /**
  *
@@ -25,15 +18,9 @@ public class PM {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        //San Lautaro
-        //jhgf
-        //JJJJ
-        //uuuu
-        //dsdsdsd
-        
-        Sistema_de_Control s = new Sistema_de_Control();
-        s.setTitle("Sistema de Control Lechero");
-        s.setVisible(true);
-       
+        Iniciar_sesión iniciar = new Iniciar_sesión();
+        iniciar.setTitle("Iniciar sesión");
+        iniciar.setLocationRelativeTo(null);
+        iniciar.setVisible(true);
     }
 }

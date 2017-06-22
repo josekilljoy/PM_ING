@@ -38,8 +38,18 @@ public class Iniciar_sesión extends javax.swing.JFrame {
         Panel_Iniciar_Sesión.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Iniciar Sesión", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Times New Roman", 0, 13))); // NOI18N
 
         botoniniciarempleado.setText("Iniciar Sesión Como Empleado");
+        botoniniciarempleado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botoniniciarempleadoActionPerformed(evt);
+            }
+        });
 
         botoniniciargerente.setText("Iniciar Sesión Como Gerente");
+        botoniniciargerente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botoniniciargerenteActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout Panel_Iniciar_SesiónLayout = new javax.swing.GroupLayout(Panel_Iniciar_Sesión);
         Panel_Iniciar_Sesión.setLayout(Panel_Iniciar_SesiónLayout);
@@ -87,6 +97,18 @@ public class Iniciar_sesión extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void botoniniciargerenteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botoniniciargerenteActionPerformed
+        // TODO add your handling code here:  
+    }//GEN-LAST:event_botoniniciargerenteActionPerformed
+
+    private void botoniniciarempleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botoniniciarempleadoActionPerformed
+        // TODO add your handling code here:        
+        this.dispose();
+        Sistema_de_Control s = new Sistema_de_Control();
+        s.setTitle("Sistema de Control Lechero");
+        s.setVisible(true);
+    }//GEN-LAST:event_botoniniciarempleadoActionPerformed
 
     /**
      * @param args the command line arguments

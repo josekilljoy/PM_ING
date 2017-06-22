@@ -291,7 +291,7 @@ public class altaEstablecimiento extends javax.swing.JFrame {
 
     public void guardar() {
         String error=validarCampos();        
-        if ("".equals(error)) {
+        if ("".equals(error) || error.length()==6) {
             altaEstablecimiento();
         }
         else {

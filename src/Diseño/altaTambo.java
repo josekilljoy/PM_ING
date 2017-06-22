@@ -208,13 +208,18 @@ public class altaTambo extends javax.swing.JFrame {
         
         String errores=validarCampos();
         
-        if ("".equals(errores)) {
+        if ("".equals(errores) || errores.length()==6) {
             altaTambo();
             
             altaAnimal altaAnim = new altaAnimal();
-            altaAnim.setTitle("Alta de nuevo Animal");
-            this.dispose();
+            
+            
+            altaAnim.setCod_t(JTF_Codigo.getText());
             altaAnim.setVisible(true);
+            this.dispose();
+        }        
+        else {
+            JOptionPane.showMessageDialog(null, "Error ingreso datos");            
         }
         
     }//GEN-LAST:event_JB_GuardarCargarActionPerformed
@@ -247,7 +252,7 @@ public class altaTambo extends javax.swing.JFrame {
         String error=validarCampos();
         
         // Si no hubo errores
-        if ( "".equals(error) ) {
+        if ( "".equals(error) || error.length()==6) {
             altaTambo();
             resetearCampos();
         }

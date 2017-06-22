@@ -78,6 +78,7 @@ public class cargarProducción extends javax.swing.JFrame {
         JTF_Etq.setText("");
         JTF_Fecha.setText("");
         JTF_Fecha.setText(getFechaPostgreSQL());
+        JTF_Cant_L.setText("").
         
         modelo= new DefaultTableModel();
         modelo.addColumn("Animal");
@@ -112,7 +113,7 @@ public class cargarProducción extends javax.swing.JFrame {
                 lista.add(rs.getString(2));
 
                 modelo.addRow(lista.toArray());
-
+                lista=new ArrayList();
                 }
             } catch (SQLException ex) {
                 Logger.getLogger(altaEstablecimiento.class.getName()).log(Level.SEVERE, null, ex);
@@ -127,7 +128,7 @@ public class cargarProducción extends javax.swing.JFrame {
         Calendar c = new GregorianCalendar();
         
         dia = Integer.toString(c.get(Calendar.DATE));
-        mes = Integer.toString(c.get(Calendar.MONTH));
+        mes = Integer.toString(c.get(Calendar.MONTH)+1);
         annio = Integer.toString(c.get(Calendar.YEAR));
         
         return ( annio + "-" + mes + "-" + dia );
@@ -161,10 +162,16 @@ public class cargarProducción extends javax.swing.JFrame {
         JCB_Empleados = new javax.swing.JComboBox<>();
         JTF_Empleado = new javax.swing.JTextField();
         JB_Mostrar = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         jToggleButton1.setText("jToggleButton1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+        });
 
         TítuloFrameCP.setText("Cargar producción:");
 
@@ -254,6 +261,13 @@ public class cargarProducción extends javax.swing.JFrame {
             }
         });
 
+        jButton1.setText("Salir");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -293,19 +307,21 @@ public class cargarProducción extends javax.swing.JFrame {
                                             .addComponent(JTF_Fecha, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(JTF_Cant_L, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                     .addGroup(layout.createSequentialGroup()
-                                        .addGap(127, 127, 127)
+                                        .addGap(65, 65, 65)
                                         .addComponent(JB_Guardar_Produ, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(JB_Cancelar_Produ, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(18, 18, 18)
-                                        .addComponent(JB_Cancelar_Produ, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))))
                             .addComponent(TítuloFrameCP))
-                        .addGap(0, 16, Short.MAX_VALUE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(JCB_Produ, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(28, 28, 28)
                         .addComponent(JCB_Estable, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(JCB_Tam, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap(24, Short.MAX_VALUE))
+                        .addComponent(JCB_Tam, 0, 153, Short.MAX_VALUE)
+                        .addGap(31, 31, 31))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -345,7 +361,8 @@ public class cargarProducción extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(JB_Cancelar_Produ)
-                            .addComponent(JB_Guardar_Produ))))
+                            .addComponent(JB_Guardar_Produ)
+                            .addComponent(jButton1))))
                 .addGap(31, 31, 31))
         );
 
@@ -484,6 +501,15 @@ public class cargarProducción extends javax.swing.JFrame {
         Mostrar();
     }//GEN-LAST:event_JB_MostrarActionPerformed
 
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_formWindowClosed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -534,6 +560,7 @@ public class cargarProducción extends javax.swing.JFrame {
     private javax.swing.JTextField JTF_Fecha;
     private javax.swing.JTable JT_Animal;
     private javax.swing.JLabel TítuloFrameCP;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;

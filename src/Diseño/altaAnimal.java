@@ -15,8 +15,23 @@ import javax.swing.JOptionPane;
  */
 public class altaAnimal extends javax.swing.JFrame {
 
+    /**
+     * @return the cod_e
+     */
+    public String getCod_e() {
+        return cod_e;
+    }
+
+    /**
+     * @param cod_e the cod_e to set
+     */
+    public void setCod_e(String cod_e) {
+        this.cod_e = cod_e;
+    }
+
     private SQLconnection conn=new SQLconnection();
     private String cod_t;
+    private String cod_e;
     /**
      * Creates new form altaAnimal
      */
@@ -202,7 +217,7 @@ public class altaAnimal extends javax.swing.JFrame {
         String errores=validarCampos();
         
         //Sin errores
-        if ("".equals(errores)) {
+        if ("".equals(errores) || errores.length()==6 ) {
             altaAnimal();
         }
         else {
