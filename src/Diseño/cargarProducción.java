@@ -78,7 +78,7 @@ public class cargarProducción extends javax.swing.JFrame {
         JTF_Etq.setText("");
         JTF_Fecha.setText("");
         JTF_Fecha.setText(getFechaPostgreSQL());
-        JTF_Cant_L.setText("").
+        JTF_Cant_L.setText("");
         
         modelo= new DefaultTableModel();
         modelo.addColumn("Animal");
